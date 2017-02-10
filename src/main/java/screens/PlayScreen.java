@@ -40,36 +40,36 @@ public class PlayScreen implements Screen {
 	}
 	
 	private void setUp(){
+		setUpNumFields();
 		this.keys = new PlayScreenKeys();
-		setUpNums();
 		this.cavernBuilder = new CavernBuilder(worldWidth, worldHeight, new Wanderer(worldWidth, worldHeight));
         createWorld();
-        factory = new CreatureFactory(world);
-        player = factory.newPlayer();
+		setUpMiscFields();
 	}
 	
 	private void setUp(KeysHandler keys){
+		setUpNumFields();
 		this.keys = keys;
-		setUpNums();
 		this.cavernBuilder = new CavernBuilder(worldWidth, worldHeight);
 		createWorld();
-        factory = new CreatureFactory(world);
-        player = factory.newPlayer();
+		setUpMiscFields();
 	}
 	
 	private void setUp(CavernBuilder builder){
+		setUpNumFields();
 		this.cavernBuilder = builder;
 		this.keys = new PlayScreenKeys();
-		
-		setUpNums();
-		
 		this.cavernBuilder = builder;
-		createWorld();
-        factory = new CreatureFactory(world);
-        player = factory.newPlayer();
+		setUpMiscFields();
 	}
 	
-	private void setUpNums(){
+	private void setUpMiscFields(){
+		createWorld();
+        factory = new CreatureFactory(world);
+        createCreatures();
+	}
+	
+	private void setUpNumFields(){
 		worldHeight = 31;
 		worldWidth = 90;
 		centerX = worldWidth/2;
@@ -139,8 +139,8 @@ public class PlayScreen implements Screen {
 	public void displayCreatures(int left, int top, AsciiPanel terminal){
 		List<Creature> creatures = world.getCreatures();
 		for(Creature creature : creatures){
-			if(creature.x() >= left && creature.x() < left+worldWidth 
-					&& creature.y() >= top && creature.y() < top+worldHeight){
+			if(creature.x() >= left && creature.x() < left+screenWidth 
+					&& creature.y() >= top && creature.y() < top+screenHeight){
 				terminal.write(creature.glyph(), creature.x() - left, creature.y() - top, creature.color());
 			}
 		}
@@ -152,5 +152,21 @@ public class PlayScreen implements Screen {
 	
 	public void setWorld(World world){
 		this.world = world;
+	}
+	
+	public void setCreatureFactory(CreatureFactory factory){
+		this.factory = factory;
+	}
+	
+	public CreatureFactory getCreatureFactory(){
+		return this.factory;
+	}
+	
+	public void createCreatures(){
+        player = factory.newPlayer();
+        
+        for(int fungusCount = 0; fungusCount < 8; fungusCount++){
+        	factory.newFungus();
+        }
 	}
 }

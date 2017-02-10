@@ -2,13 +2,16 @@ package world;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-import java.awt.List;
 import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
+import asciiPanel.AsciiPanel;
 import creatures.Creature;
 import creatures.CreatureFactory;
 import tiles.FloorTile;
@@ -141,6 +144,41 @@ public class WorldTest {
 		world.addAtEmptyLocation(creature);
 		Creature test = world.getCreatureAt(creature.x(), creature.y());
 		assertEquals(creature, test);
+	}
+	
+	@Test
+	public void testSetCreatureAt(){
+		Creature creature = factory.newPlayer();
+		int expectedX = 2;
+		int expectedY = 2;
+		int expectedCreaturesSize = world.getCreatures().size() + 1;
+		world.setCreatureAt(expectedX, expectedY, creature);
+		assertEquals(expectedX, creature.x());
+		assertEquals(expectedY, creature.y());
+		assertEquals(world.getCreatures().size(), expectedCreaturesSize);
+	}
+	
+	@Test
+	public void testRemove(){
+		Creature creature = factory.newPlayer();
+		int expectedCreaturesSize = world.getCreatures().size() - 1;
+		boolean expectedCreatureInList = false;
+		world.remove(creature);
+		assertEquals(expectedCreaturesSize, world.getCreatures().size());
+		assertEquals(expectedCreatureInList, world.getCreatures().remove(creature));
+	}
+	
+	@Test
+	public void testUpdate(){
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
+		
+		world.update();
+		for(Creature creature : world.getCreatures()){
+			verify(creature, times(1)).update();
+		}
 	}
 
 }

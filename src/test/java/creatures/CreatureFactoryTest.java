@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import creatureAIs.FungusAI;
 import creatureAIs.PlayerAI;
 import world.World;
 
@@ -41,6 +42,23 @@ public class CreatureFactoryTest {
 	public void testNewPlayerCallsAddAtEmptyLocationFromWorld(){
 		Creature player = factory.newPlayer();
 		verify(world, times(1)).addAtEmptyLocation(player);
+	}
+	
+	@Test
+	public void testNewFungusCreatesNewFungus(){
+		assertThat(factory.newFungus(), instanceOf(Creature.class));
+	}
+	
+	@Test
+	public void testNewFungusCreatesNewFungusWithAnAI(){
+		Creature fungus = factory.newFungus();
+		assertThat(fungus.ai(), instanceOf(FungusAI.class));
+	}
+	
+	@Test
+	public void testNewFungusCallsAddAtEmptyLocationFromWorld(){
+		Creature fungus = factory.newFungus();
+		verify(world, times(1)).addAtEmptyLocation(fungus);
 	}
 
 }

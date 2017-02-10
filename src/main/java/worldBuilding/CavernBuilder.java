@@ -50,5 +50,8 @@ public class CavernBuilder {
 		tiles[x][y] = newTile;
 	}
 
+	public void setTiles(Tile[][] tiles){
+		this.tiles = tiles;
+	}
 	
 }

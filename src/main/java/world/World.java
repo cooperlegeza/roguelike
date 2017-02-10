@@ -59,9 +59,7 @@ public class World {
 			y = (int)(Math.random() * height);
 		} while (!getTile(x, y).isGround());
 		
-		creature.setX(x);
-		creature.setY(y);
-		creatures.add(creature);
+		setCreatureAt(x, y, creature);
 	}
 	
 	public Creature getCreatureAt(int x, int y){
@@ -73,6 +71,22 @@ public class World {
 	
 	public List<Creature> getCreatures(){
 		return this.creatures;
+	}
+	
+	public void setCreatureAt(int x, int y, Creature creature){
+		creature.setX(x);
+		creature.setY(y);
+		creatures.add(creature);
+	}
+	
+	public void remove(Creature creature){
+		creatures.remove(creature);
+	}
+	
+	public void update(){
+		for(Creature creature : creatures){
+			creature.update();
+		}
 	}
 
 }

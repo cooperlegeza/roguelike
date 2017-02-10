@@ -36,7 +36,24 @@ public class Creature {
 		int newX = x+xDistance;
 		int newY = y+yDistance;
 		if(newX >= 0 && newX < world.getWidth() && newY >= 0 && newY < world.getHeight()){
-			ai.onEnter(x+xDistance, y+yDistance, world.getTile(x+xDistance, y+yDistance));
+			checkForObstaclesAndReactAccordingly(newX, newY);
 		}
+	}
+	
+	public void checkForObstaclesAndReactAccordingly(int newX, int newY){
+		Creature other = world.getCreatureAt(newX, newY);
+		if(other == null ){
+			ai.onEnter(newX, newY, world.getTile(newX, newY));
+		} else {
+			attack(other);
+		}
+	}
+	
+	public void attack(Creature other){
+		world.remove(other);
+	}
+	
+	public void update(){
+		ai.onUpdate();
 	}
 }

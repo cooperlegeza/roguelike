@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="12" failures="0" name="world.WorldTest" time="0" errors="0" skipped="0">
+<testsuite tests="17" failures="0" name="world.WorldTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\devl\Java\jdk1.8.0_101\jre\bin"/>
@@ -68,11 +68,16 @@
   <testcase classname="world.WorldTest" name="testGetTiles" time="0"/>
   <testcase classname="world.WorldTest" name="testGetWidth" time="0"/>
   <testcase classname="world.WorldTest" name="testGetTileGetsOutOfBoundsIfTileXIsGreaterThanWidth" time="0"/>
+  <testcase classname="world.WorldTest" name="testGetCreatureAt" time="0"/>
+  <testcase classname="world.WorldTest" name="testAddAtEmptyLocationAddsToCreatures" time="0"/>
   <testcase classname="world.WorldTest" name="testAddAtEmptyLocation" time="0"/>
   <testcase classname="world.WorldTest" name="testGetTileGetsOutOfBoundsIfBothParamsAreInappropriate" time="0"/>
+  <testcase classname="world.WorldTest" name="testSetCreatureAt" time="0"/>
   <testcase classname="world.WorldTest" name="testGetTileGetsOutOfBoundsIfTileXIsLessThan0" time="0"/>
   <testcase classname="world.WorldTest" name="testGetTileGetsOutOfBoundsIfTileYIsLessThan0" time="0"/>
   <testcase classname="world.WorldTest" name="testGetTileGetsTileThatExists" time="0"/>
   <testcase classname="world.WorldTest" name="testGetHeight" time="0"/>
   <testcase classname="world.WorldTest" name="testGetTileGetsOutOfBoundsIfTileYIsGreaterThanHeight" time="0"/>
+  <testcase classname="world.WorldTest" name="testGetCreatures" time="0"/>
+  <testcase classname="world.WorldTest" name="testRemove" time="0"/>
 </testsuite>

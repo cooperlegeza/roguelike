@@ -48,8 +48,14 @@ public class CavernBuilderTest {
 	
 	@Test
 	public void testGetTiles(){
-		Tile[][] testTiles = new Tile[testWidth][testHeight];
-		CavernBuilder newBuilder = new CavernBuilder(testWidth, testHeight, mockedNoise);
+		Tile[][] testTiles = {
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+		};
+		CavernBuilder newBuilder = new CavernBuilder(testTiles.length, testTiles[0].length, mockedNoise);
+		newBuilder.setTiles(testTiles);
 		assertArrayEquals(newBuilder.getTiles(), testTiles);
 	}
 	
@@ -77,6 +83,18 @@ public class CavernBuilderTest {
 		builder.changeTile(testTileX, testTileY, newTile);
 		Tile testTile = builder.getTiles()[testTileX][testTileY];
 		assertThat(testTile, instanceOf(WallTile.class));
+	}
+	
+	@Test
+	public void testSetTiles(){
+		Tile[][] testTiles = {
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+				{new WallTile(), new WallTile(), new WallTile(), new WallTile()},
+		};
+		builder.setTiles(testTiles);
+		assertArrayEquals(testTiles, builder.getTiles());
 	}
 
 }
