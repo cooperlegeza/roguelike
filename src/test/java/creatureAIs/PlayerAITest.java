@@ -26,7 +26,7 @@ public class PlayerAITest {
 	
 	@Before
 	public void initialize() {
-		player = new Creature(world, '@', AsciiPanel.green);
+		player = new Creature(world, '@', AsciiPanel.green, 100);
 		playerAI = new PlayerAI(player);
 		player.setCreatureAI(playerAI);
 		player.setX(5);

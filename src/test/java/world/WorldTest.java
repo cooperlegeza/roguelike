@@ -170,10 +170,10 @@ public class WorldTest {
 	
 	@Test
 	public void testUpdate(){
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta)));
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
+		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
 		
 		world.update();
 		for(Creature creature : world.getCreatures()){

@@ -60,5 +60,14 @@ public class CreatureFactoryTest {
 		Creature fungus = factory.newFungus();
 		verify(world, times(1)).addAtEmptyLocation(fungus);
 	}
+	
+	@Test
+	public void testNewFungusOverloadedSetsNewFungusAtSpotInWorld(){
+		int expectedX = 0;
+		int expectedY = 0;
+		Creature fungus = factory.newFungus(expectedX, expectedY);
+		assertEquals(expectedX, fungus.x());
+		assertEquals(expectedY, fungus.y());
+	}
 
 }

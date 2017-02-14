@@ -90,6 +90,7 @@ public class PlayScreen implements Screen {
 
 	public Screen respondToUserInput(KeyEvent key) {
 		Screen returnScreen = this.keys.respondToUserInput(key, this);
+		world.update();
 		return returnScreen;
 	}
 	

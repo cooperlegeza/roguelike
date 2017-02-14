@@ -25,11 +25,21 @@ public class Creature {
 	private CreatureAI ai;
 	public void setCreatureAI(CreatureAI ai){this.ai = ai;}
 	public CreatureAI ai(){return this.ai;}
+	
+	private int maxHP;
+	public void setMaxHP(int newMax){this.maxHP = newMax;}
+	public int getMaxHP(){return this.maxHP;}
+	
+	private int hp;
+	public void setHP(int hp){this.hp = hp;}
+	public int getHP(){return this.hp;}
 
-	public Creature(World world, char glyph, Color color){
+	public Creature(World world, char glyph, Color color, int maxHP){
 		this.world = world;
 		this.glyph = glyph;
 		this.color = color;
+		this.maxHP = maxHP;
+		this.hp = maxHP;
 	}
 	
 	public void moveBy(int xDistance, int yDistance){
@@ -42,7 +52,7 @@ public class Creature {
 	
 	public void checkForObstaclesAndReactAccordingly(int newX, int newY){
 		Creature other = world.getCreatureAt(newX, newY);
-		if(other == null ){
+		if(other == null){
 			ai.onEnter(newX, newY, world.getTile(newX, newY));
 		} else {
 			attack(other);
@@ -55,5 +65,14 @@ public class Creature {
 	
 	public void update(){
 		ai.onUpdate();
+	}
+	
+	public boolean canEnter(int x, int y){
+		return (x >= 0 && x < world.getWidth() && y >= 0 && y < world.getHeight())
+				&& world.getCreatureAt(x, y) == null && world.getTile(x, y).isGround();
+	}
+	
+	public void modifyHP(int amount){
+		this.hp += amount;
 	}
 }

@@ -132,7 +132,7 @@ public class PlayScreenTest {
 	
 	@Test
 	public void testSetPlayer(){
-		Creature newPlayer = new Creature(mockedWorld, '@', AsciiPanel.green);
+		Creature newPlayer = new Creature(mockedWorld, '@', AsciiPanel.green, 100);
 		playScreen.setPlayer(newPlayer);
 		assertEquals(newPlayer, playScreen.getPlayer());
 	}
@@ -187,7 +187,7 @@ public class PlayScreenTest {
 	}
 	
 	private Creature makeCreature(char glyph, int x, int y){
-		Creature creature = new Creature(mockedWorld, glyph, AsciiPanel.brightBlue);
+		Creature creature = new Creature(mockedWorld, glyph, AsciiPanel.brightBlue, 100);
 		creature.setX(x);
 		creature.setY(y);
 		return creature;
@@ -212,5 +212,12 @@ public class PlayScreenTest {
 		playScreen.createCreatures();
 		verify(factory, times(1)).newPlayer();
 		verify(factory, times(8)).newFungus();
+	}
+	
+	@Test
+	public void testRespondToUserInputCallsWorldUpdate(){
+		playScreen.setWorld(mockedWorld);
+		playScreen.respondToUserInput(mockedKey);
+		verify(mockedWorld, times(1)).update();
 	}
 }

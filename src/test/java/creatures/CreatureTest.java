@@ -35,7 +35,7 @@ public class CreatureTest {
 				{new WallTile(), new WallTile(), new FloorTile(), new FloorTile()},
 		};
 		world = new World(tiles);
-		creature = Mockito.spy(new Creature(world, '@', AsciiPanel.green));
+		creature = Mockito.spy(new Creature(world, '@', AsciiPanel.green, 100));
 		creatureAI = new CreatureAI(creature);
 		creatureAISpy = Mockito.spy(creatureAI);
 		floor = new FloorTile();
@@ -97,7 +97,7 @@ public class CreatureTest {
 	
 	@Test
 	public void testCheckForObstaclesAndReactAccordinglyCreature(){
-		Creature newCreature = new Creature(world, 'f', AsciiPanel.green);
+		Creature newCreature = new Creature(world, 'f', AsciiPanel.green, 100);
 		world.setCreatureAt(3, 2, newCreature);
 		creature.setX(2);
 		creature.setY(2);
@@ -108,7 +108,7 @@ public class CreatureTest {
 	@Test
 	public void testAttack(){
 		World worldSpy = Mockito.spy(world);
-		Creature newCreature = new Creature(worldSpy, '@', AsciiPanel.brightBlack);
+		Creature newCreature = new Creature(worldSpy, '@', AsciiPanel.brightBlack, 100);
 		newCreature.attack(creature);
 		verify(worldSpy, times(1)).remove(creature);
 	}
@@ -117,5 +117,89 @@ public class CreatureTest {
 	public void testUpdate(){
 		creature.update();
 		verify(creatureAISpy, times(1)).onUpdate();
+	}
+	
+	@Test
+	public void testCanEnterCreatureOnTile(){
+		World worldSpy = Mockito.spy(world);
+		Creature newCreature = new Creature(worldSpy, '@', AsciiPanel.brightCyan, 100);
+		Creature fakeCreature = new Creature(worldSpy, '@', AsciiPanel.brightRed, 100);
+		when(worldSpy.getCreatureAt(2, 2)).thenReturn(fakeCreature);
+		boolean actual = newCreature.canEnter(2, 2);
+		boolean expected = false;
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCanEnterXLessThanZero(){
+		boolean actual = creature.canEnter(-1, 2);
+		boolean expected = false;
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCanEnterYLessThanZero(){
+		boolean actual = creature.canEnter(2, -1);
+		boolean expected = false;
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCanEnterXGreaterThanWorldWidth(){
+		boolean actual = creature.canEnter(world.getWidth() + 1, 2);
+		boolean expected = false;
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCanEnterYGreaterThanWorldHeight(){
+		boolean actual = creature.canEnter(2, world.getHeight() + 1);
+		boolean expected = false;
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCanEnterActuallyCanEnter(){
+		boolean actual = creature.canEnter(2, 2);
+		boolean expected = true;
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testMaxHPGettersAndSetters(){
+		int newMaxHP = 20;
+		creature.setMaxHP(newMaxHP);
+		assertEquals(newMaxHP, creature.getMaxHP());
+	}
+	
+	@Test
+	public void testHPGettersAndSetters(){
+		int newHP = 10;
+		creature.setHP(newHP);
+		assertEquals(newHP, creature.getHP());
+	}
+	
+	@Test
+	public void testModifyHP(){
+		int modifiedAmount = 10;
+		int expected = creature.getHP() + modifiedAmount;
+		creature.modifyHP(modifiedAmount);
+		assertEquals(expected, creature.getHP());
+	}
+	
+	@Test
+	public void testModifyHPMore(){
+		int modifiedAmount = 15;
+		int expected = creature.getHP() + modifiedAmount;
+		creature.modifyHP(modifiedAmount);
+		assertEquals(expected, creature.getHP());
+	}
+	
+	@Test
+	public void testModifyHPNegativeAmount(){
+		int modifiedAmount = -10;
+		int expected = creature.getHP() + modifiedAmount;
+		creature.modifyHP(modifiedAmount);
+		assertEquals(expected, creature.getHP());
 	}
 }

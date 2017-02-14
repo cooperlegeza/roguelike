@@ -84,9 +84,10 @@ public class World {
 	}
 	
 	public void update(){
-		for(Creature creature : creatures){
-			creature.update();
-		}
+		List<Creature> toUpdate = new LinkedList<Creature>(creatures);
+	    for (Creature creature : toUpdate){
+	        creature.update();
+	    }
 	}
 
 }
