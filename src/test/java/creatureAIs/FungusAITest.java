@@ -5,6 +5,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,28 +21,34 @@ import creatures.CreatureFactory;
 import tiles.FloorTile;
 import tiles.Tile;
 import utils.RogueMath;
+import world.Layer;
 import world.World;
+import world.WorldImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FungusAITest {
 	
 	CreatureFactory factory;
 	Creature creature;
-	World world;
+	Layer layer;
 	@Mock RogueMath math;
 	FungusAI ai;
 	FungusAI aiSpy;
+	World world;
 	
 	@Before
 	public void initialize(){
+		List<Layer> layers = new LinkedList<Layer>();
+		world = new WorldImpl(layers);
 		Tile[][] tiles = {
 				{new FloorTile(), new FloorTile()},
 				{new FloorTile(), new FloorTile()}
 		};
-		world = new World(tiles);
+		layer = new Layer(tiles, world);
+		layers.add(layer);
 		factory = Mockito.spy(new CreatureFactory(world));
 		creature = Mockito.spy(new Creature(world, 'f', AsciiPanel.green, 100));
-		world.setCreatureAt(0, 0, creature);
+		world.setCreatureAt(0, 0, 0, creature);
 		ai = new FungusAI(creature, factory, math);
 		aiSpy = Mockito.spy(ai);
 	}
@@ -158,7 +167,7 @@ public class FungusAITest {
 		when(math.random()).thenReturn(.6);
 		aiSpy.spread();
 		when(creature.canEnter(1, 1)).thenReturn(true);
-		verify(factory, times(1)).newFungus(1, 1);
+		verify(factory, times(1)).newFungus(1, 1, 0);
 	}
 	
 	@Test
@@ -188,7 +197,7 @@ public class FungusAITest {
 	public void testSpreadSetsNewCreaturesLocation(){
 		when(math.random()).thenReturn(.6);
 		aiSpy.spread();
-		verify(factory, times(1)).newFungus(1, 1);
+		verify(factory, times(1)).newFungus(1, 1, 0);
 	}
 
 }

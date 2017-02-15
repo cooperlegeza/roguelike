@@ -37,7 +37,8 @@ public class FungusAI extends CreatureAI {
 		int newX = getGoodXLocation();
 		int newY = getGoodYLocation();
 		if(creature.canEnter(newX, newY)){
-			womb.newFungus(newX, newY);
+			creature.doAction("spawn a child");
+			womb.newFungus(newX, newY, creature.z());
 			spreadCount++;
 		}
 	}

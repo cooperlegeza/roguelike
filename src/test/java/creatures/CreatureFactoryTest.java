@@ -65,9 +65,11 @@ public class CreatureFactoryTest {
 	public void testNewFungusOverloadedSetsNewFungusAtSpotInWorld(){
 		int expectedX = 0;
 		int expectedY = 0;
-		Creature fungus = factory.newFungus(expectedX, expectedY);
+		int expectedZ = 0;
+		Creature fungus = factory.newFungus(expectedX, expectedY, expectedZ);
 		assertEquals(expectedX, fungus.x());
 		assertEquals(expectedY, fungus.y());
+		assertEquals(expectedZ, fungus.z());
 	}
 
 }

@@ -2,6 +2,9 @@ package creatureAIs;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,16 +16,18 @@ import creatures.Creature;
 import tiles.FloorTile;
 import tiles.Tile;
 import tiles.WallTile;
+import world.Layer;
 import world.World;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PlayerAITest {
 	
-	@Mock World world;
+	@Mock Layer layer;
 	
 	PlayerAI playerAI;
 	Creature player;
 	Tile tile;
+	@Mock World world;
 	
 	@Before
 	public void initialize() {
@@ -54,5 +59,22 @@ public class PlayerAITest {
 		assertEquals(expectedX, player.x());
 		assertEquals(expectedY, player.y());
 	}
-
+	
+	@Test
+	public void testGetMessages(){
+		List<String> list = new ArrayList<String>();
+		PlayerAI ai = new PlayerAI(new Creature(world, '@', AsciiPanel.green, 100), list);
+		assertEquals(list, ai.getMessages());
+	}
+	
+	@Test
+	public void testOnNotify(){
+		List<String> list = new ArrayList<String>();
+		PlayerAI ai = new PlayerAI(new Creature(world, '@', AsciiPanel.green, 100), list);
+		String message = "This is a message!"; 
+		ai.onNotify(message);
+		int expectedSize = 1;
+		assertEquals(expectedSize, ai.getMessages().size());
+		assertEquals(message, ai.getMessages().get(0));
+	}
 }

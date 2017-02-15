@@ -2,6 +2,7 @@ package worldBuilding;
 
 import tiles.Tile;
 import tiles.WallTile;
+import world.Layer;
 import world.World;
 
 public class CavernBuilder {
@@ -33,9 +34,10 @@ public class CavernBuilder {
 		return this.tiles;
 	}
 	
-	public World build(){
+	public Layer build(World world){
 		tiles = method.makeCaves();
-		return new World(tiles);
+		return new Layer(tiles, world);
+
 	}
 
 	public void wallUp() {

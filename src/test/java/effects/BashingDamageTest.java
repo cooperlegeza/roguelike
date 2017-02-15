@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import creatures.Creature;
 import utils.RogueMath;
-import world.World;
+import world.Layer;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BashingDamageTest {
@@ -25,7 +25,7 @@ public class BashingDamageTest {
 	RogueMath math;
 	
 	@Mock Creature creature;
-	@Mock World world;
+	@Mock Layer layer;
 	
 	@Before
 	public void initialize(){
@@ -54,7 +54,7 @@ public class BashingDamageTest {
 		when(math.random()).thenReturn(.999999);
 		int maxDamage = 10;
 		damage.applyEffects(creature);
-		verify(creature, times(1)).modifyHP(maxDamage);
+		verify(creature, times(1)).modifyHP(-maxDamage);
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class BashingDamageTest {
 		when(math.random()).thenReturn(0.0);
 		int minDamage = 3;
 		damage.applyEffects(creature);
-		verify(creature, times(1)).modifyHP(minDamage);
+		verify(creature, times(1)).modifyHP(-minDamage);
 	}
 
 }

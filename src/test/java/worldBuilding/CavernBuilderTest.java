@@ -13,12 +13,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import tiles.FloorTile;
 import tiles.Tile;
 import tiles.WallTile;
+import world.Layer;
 import world.World;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CavernBuilderTest {
 
 	@Mock Noise mockedNoise;
+	@Mock World world;
 	
 	CavernBuilder builder;
 	CavernBuilder builderSpy;
@@ -43,7 +45,7 @@ public class CavernBuilderTest {
 	
 	@Test
 	public void testBuild() {
-		assertThat(builder.build(), instanceOf(World.class));
+		assertThat(builder.build(world), instanceOf(Layer.class));
 	}
 	
 	@Test

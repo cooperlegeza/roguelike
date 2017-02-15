@@ -1,161 +1,105 @@
 package world;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import java.awt.Color;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import asciiPanel.AsciiPanel;
 import creatures.Creature;
 import creatures.CreatureFactory;
-import tiles.FloorTile;
-import tiles.OutOfBoundsTile;
 import tiles.Tile;
 import tiles.WallTile;
+import utils.RogueMath;
 
+@RunWith(MockitoJUnitRunner.class)
 public class WorldTest {
 	
-	int worldWidth = 4;
-	int worldHeight = 4;
-	Tile[][] tiles;
-	World world;
-	WallTile testTile;
+	public List<Layer> layers;
+	public World world;
+	public Layer spyLayer;
+	int x, y, z;
+	public WallTile spyWall;
+	public RogueMath math;
 	CreatureFactory factory;
-	int testTileX;
-	int testTileY;
-	int outOfBoundsXLow;
-	int outOfBoundsXHigh;
-	int outOfBoundsYLow;
-	int outOfBoundsYHigh;
 	
 	@Before
 	public void initialize(){
-		testTileX = 1;
-		testTileY = 2;
-		outOfBoundsXLow = -1;
-		outOfBoundsXHigh = 4;
-		outOfBoundsYLow = -1;
-		outOfBoundsYHigh = 4;
+		layers = new LinkedList<Layer>();
+		spyWall = new WallTile();
+		math = Mockito.mock(RogueMath.class);
 		
-		testTile = new WallTile();
-		Tile[][] newTiles = {
-				{new WallTile(), new FloorTile(), new WallTile(), new FloorTile()},
-				{new FloorTile(), new FloorTile(), new WallTile(), new WallTile()},
-				{new WallTile(), new WallTile(), new WallTile(), new FloorTile()},
-				{new WallTile(), new FloorTile(), new WallTile(), new FloorTile()},
-		};
-		tiles = newTiles;
-		tiles[testTileX][testTileY] = testTile;
-		world = new World(tiles);
-		factory = new CreatureFactory(world);
-	}
-
-	@Test
-	public void testGetHeight() {
-		assertEquals(world.getHeight(), worldHeight);
-	}
-	
-	@Test
-	public void testGetWidth(){
-		assertEquals(world.getWidth(), worldWidth);
-	}
-	
-	@Test
-	public void testGetTiles(){
-		assertArrayEquals(world.getTiles(), tiles);
-	}
-	
-	@Test
-	public void testGetTileGetsTileThatExists(){
-		assertEquals(world.getTile(testTileX, testTileY), testTile);
-	}
-	
-	@Test
-	public void testGetTileGetsOutOfBoundsIfTileXIsLessThan0(){
-		assertThat(world.getTile(outOfBoundsXLow, testTileY), instanceOf(OutOfBoundsTile.class));
-	}
-	
-	@Test
-	public void testGetTileGetsOutOfBoundsIfTileXIsGreaterThanWidth(){
-		assertThat(world.getTile(outOfBoundsXHigh, testTileY), instanceOf(OutOfBoundsTile.class));
-	}
-	
-	@Test
-	public void testGetTileGetsOutOfBoundsIfTileYIsGreaterThanHeight(){
-		assertThat(world.getTile(testTileX, outOfBoundsYHigh), instanceOf(OutOfBoundsTile.class));
-	}
-	
-	@Test
-	public void testGetTileGetsOutOfBoundsIfTileYIsLessThan0(){
-		assertThat(world.getTile(testTileX, outOfBoundsYLow), instanceOf(OutOfBoundsTile.class));
-	}
-	
-	@Test
-	public void testGetTileGetsOutOfBoundsIfBothParamsAreInappropriate(){
-		int[] paramsX = {outOfBoundsXHigh, outOfBoundsXLow};
-		int[] paramsY = {outOfBoundsYHigh, outOfBoundsYLow};
-		for(int x : paramsX){
-			for(int y : paramsY){
-				assertThat(world.getTile(x, y), instanceOf(OutOfBoundsTile.class));
+		for(int layerCount = 0; layerCount < 3; layerCount++){
+			if(layerCount == 1){
+				spyLayer = Mockito.mock(Layer.class);
+				layers.add(spyLayer);
+			} else {
+				Layer layer = Mockito.mock(Layer.class);
+				layers.add(layer);
 			}
 		}
+		x = 1;
+		y = 1;
+		z = 1;
+		world = new WorldImpl(layers, math);
+		factory = new CreatureFactory(world);
+	}
+	
+	@Test
+	public void testGetTile(){
+		when(spyLayer.getTile(x, y)).thenReturn(spyWall);
+		Tile test = world.getTile(x, y, z);
+		verify(spyLayer, times(1)).getTile(x, y);
+		assertEquals(spyWall, test);
 	}
 	
 	@Test
 	public void testGetGlyph(){
-		assertEquals(world.getGlyph(testTileX, testTileY), testTile.getSymbol());
+		when(spyLayer.getGlyph(x, y)).thenReturn(spyWall.getSymbol());
+		char test = world.getGlyph(x, y, z);
+		verify(spyLayer, times(1)).getGlyph(x, y);
+		assertEquals(spyWall.getSymbol(), test);
 	}
 	
 	@Test
 	public void testGetColor(){
-		assertEquals(world.getColor(testTileX, testTileY), testTile.getColor());
+		when(spyLayer.getColor(x, y)).thenReturn(spyWall.getColor());
+		Color test = world.getColor(x, y, z);
+		verify(spyLayer, times(1)).getColor(x, y);
+		assertEquals(spyWall.getColor(), test);
 	}
 	
 	@Test
 	public void testAddAtEmptyLocation(){
-		boolean isGround = true;
-		Creature player = factory.newPlayer();
-		world.addAtEmptyLocation(player);
-		assertEquals(isGround, world.getTile(player.x(), player.y()).isGround());
-	}
-	
-	@Test
-	public void testAddAtEmptyLocationAddsToCreatures(){
-		int expectedSizeOfCreatures = world.getCreatures().size() + 1;
-		Creature player = factory.newPlayer();
-		world.addAtEmptyLocation(player);
-		assertEquals(expectedSizeOfCreatures, 1);
-	}
-	
-	@Test
-	public void testGetCreatures(){
-		assertThat(world.getCreatures(), instanceOf(LinkedList.class));
+		when(math.random()).thenReturn(0.5);
+		Creature creature = Mockito.mock(Creature.class);
+		world.addAtEmptyLocation(creature);
+		verify(spyLayer, times(1)).addAtEmptyLocation(creature);
 	}
 	
 	@Test
 	public void testGetCreatureAt(){
-		Creature creature = factory.newPlayer();
-		world.addAtEmptyLocation(creature);
-		Creature test = world.getCreatureAt(creature.x(), creature.y());
-		assertEquals(creature, test);
+		world.getCreatureAt(x, y, z);
+		verify(spyLayer, times(1)).getCreatureAt(x, y);
 	}
 	
 	@Test
-	public void testSetCreatureAt(){
-		Creature creature = factory.newPlayer();
-		int expectedX = 2;
-		int expectedY = 2;
-		int expectedCreaturesSize = world.getCreatures().size() + 1;
-		world.setCreatureAt(expectedX, expectedY, creature);
-		assertEquals(expectedX, creature.x());
-		assertEquals(expectedY, creature.y());
-		assertEquals(world.getCreatures().size(), expectedCreaturesSize);
+	public void testAddCreature(){
+		Creature creature = Mockito.mock(Creature.class);
+		int expected = world.getCreatures().size() + 1;
+		world.addCreature(creature);
+		assertEquals(expected, world.getCreatures().size());
+		assertEquals(creature, world.getCreatures().get(0));
 	}
 	
 	@Test
@@ -169,12 +113,26 @@ public class WorldTest {
 	}
 	
 	@Test
+	public void testSetCreatureAt(){
+		int expectedCreaturesSize = world.getCreatures().size() + 1;
+		Creature creature = new Creature(world, '@', AsciiPanel.green, 100);
+		int expectedX = 2;
+		int expectedY = 2;
+		int expectedZ = 1;
+		world.setCreatureAt(expectedX, expectedY, expectedZ, creature);
+		assertEquals(expectedZ, creature.z());
+		verify(spyLayer, times(1)).setCreatureAt(expectedX, expectedY, creature);
+		assertEquals(world.getCreatures().size(), expectedCreaturesSize);
+	}
+
+	
+	@Test
 	public void testUpdate(){
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
-		world.setCreatureAt(2, 2, Mockito.spy(new Creature(world, '@', AsciiPanel.brightMagenta, 100)));
-		
+		world.setCreatureAt(2, 2, 0, Mockito.mock(Creature.class));
+		world.setCreatureAt(1, 1, 0, Mockito.mock(Creature.class));
+		world.setCreatureAt(1, 2, 0, Mockito.mock(Creature.class));
+		world.setCreatureAt(2, 1, 0, Mockito.mock(Creature.class));
+
 		world.update();
 		for(Creature creature : world.getCreatures()){
 			verify(creature, times(1)).update();

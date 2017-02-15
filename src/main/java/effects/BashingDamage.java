@@ -30,7 +30,7 @@ public class BashingDamage implements Effect {
 	@Override
 	public void applyEffects(Creature other) {
 		int damage = (int)(math.random()*(maxDamage-minDamage+1)) + minDamage;
-		other.modifyHP(damage);
+		other.modifyHP(-damage);
 	}
 	
 	

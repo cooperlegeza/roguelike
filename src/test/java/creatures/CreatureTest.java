@@ -3,6 +3,10 @@ package creatures;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,37 +15,48 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import asciiPanel.AsciiPanel;
 import creatureAIs.CreatureAI;
+import creatureAIs.PlayerAI;
 import tiles.FloorTile;
 import tiles.Tile;
 import tiles.WallTile;
+import weapons.Fists;
+import world.Layer;
 import world.World;
+import world.WorldImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreatureTest {
 	
 	CreatureAI creatureAI;
 	CreatureAI creatureAISpy;
-	World world;
+	Layer layer;
 	
 	Creature creature;
 	FloorTile floor;
+	World world;
 	
 	@Before
 	public void initialize(){
+		List<Layer> layers = new LinkedList<Layer>();
+		world = new WorldImpl(layers);
 		Tile[][] tiles = {
 				{new FloorTile(), new FloorTile(), new FloorTile(), new FloorTile()},
 				{new FloorTile(), new FloorTile(), new WallTile(), new WallTile()},
 				{new WallTile(), new WallTile(), new FloorTile(), new FloorTile()},
 				{new WallTile(), new WallTile(), new FloorTile(), new FloorTile()},
 		};
-		world = new World(tiles);
+		layer = new Layer(tiles, world);
+		layers.add(layer);
 		creature = Mockito.spy(new Creature(world, '@', AsciiPanel.green, 100));
+		Fists fists = Mockito.mock(Fists.class);
+		creature.setBaseWeapon(fists);
 		creatureAI = new CreatureAI(creature);
 		creatureAISpy = Mockito.spy(creatureAI);
 		floor = new FloorTile();
 		creature.setCreatureAI(creatureAISpy);
 		creature.setX(2);
 		creature.setY(2);
+		creature.setZ(0);
 	}
 	
 	@Test
@@ -92,13 +107,14 @@ public class CreatureTest {
 	@Test
 	public void testCheckForObstaclesAndReactAccordinglyNoCreature(){
 		creature.checkForObstaclesAndReactAccordingly(2, 2);
-		verify(creatureAISpy, times(1)).onEnter(2, 2, world.getTile(2, 2));
+		verify(creatureAISpy, times(1)).onEnter(2, 2, layer.getTile(2, 2));
 	}
 	
 	@Test
 	public void testCheckForObstaclesAndReactAccordinglyCreature(){
 		Creature newCreature = new Creature(world, 'f', AsciiPanel.green, 100);
-		world.setCreatureAt(3, 2, newCreature);
+		new PlayerAI(newCreature, new ArrayList<String>());
+		world.setCreatureAt(3, 2, 0, newCreature);
 		creature.setX(2);
 		creature.setY(2);
 		creature.moveBy(1, 0);
@@ -109,8 +125,10 @@ public class CreatureTest {
 	public void testAttack(){
 		World worldSpy = Mockito.spy(world);
 		Creature newCreature = new Creature(worldSpy, '@', AsciiPanel.brightBlack, 100);
+		Fists fists = Mockito.mock(Fists.class);
+		newCreature.setBaseWeapon(fists);
 		newCreature.attack(creature);
-		verify(worldSpy, times(1)).remove(creature);
+		verify(fists, times(1)).applyEffects(creature);
 	}
 	
 	@Test
@@ -124,7 +142,7 @@ public class CreatureTest {
 		World worldSpy = Mockito.spy(world);
 		Creature newCreature = new Creature(worldSpy, '@', AsciiPanel.brightCyan, 100);
 		Creature fakeCreature = new Creature(worldSpy, '@', AsciiPanel.brightRed, 100);
-		when(worldSpy.getCreatureAt(2, 2)).thenReturn(fakeCreature);
+		when(worldSpy.getCreatureAt(2, 2, newCreature.z())).thenReturn(fakeCreature);
 		boolean actual = newCreature.canEnter(2, 2);
 		boolean expected = false;
 		assertEquals(expected, actual);
@@ -146,14 +164,14 @@ public class CreatureTest {
 	
 	@Test
 	public void testCanEnterXGreaterThanWorldWidth(){
-		boolean actual = creature.canEnter(world.getWidth() + 1, 2);
+		boolean actual = creature.canEnter(layer.getWidth() + 1, 2);
 		boolean expected = false;
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testCanEnterYGreaterThanWorldHeight(){
-		boolean actual = creature.canEnter(2, world.getHeight() + 1);
+		boolean actual = creature.canEnter(2, layer.getHeight() + 1);
 		boolean expected = false;
 		assertEquals(expected, actual);
 	}
@@ -201,5 +219,49 @@ public class CreatureTest {
 		int expected = creature.getHP() + modifiedAmount;
 		creature.modifyHP(modifiedAmount);
 		assertEquals(expected, creature.getHP());
+	}
+	
+	@Test
+	public void testCreatureDiesAtLessThan1HP(){
+		World worldSpy = Mockito.spy(world);
+		Creature creature = Mockito.spy(new Creature(worldSpy, '@', AsciiPanel.brightBlue, 100));
+		creature.modifyHP(-(creature.getMaxHP()+1));
+		verify(worldSpy, times(1)).remove(creature);
+	}
+	
+	@Test
+	public void testDamageReductionGettersAndSetters(){
+		int newDamageReduction = 5;
+		creature.setDamageReduction(newDamageReduction);
+		assertEquals(newDamageReduction, creature.getDamageReduction());
+	}
+	
+	@Test
+	public void testNotifyOnlyMessage(){
+		String message = "This is a message!";
+		creature.notify(message);
+		verify(creatureAISpy, times(1)).onNotify(message);
+	}
+	
+	@Test
+	public void testNotifyWithParams(){
+		String message = "This is a %s";
+		Object[] params = {"message"};
+		creature.notify(message, params);
+		verify(creatureAISpy, times(1)).onNotify(String.format(message, params));
+	}
+	
+	@Test
+	public void testZGettersAndSetters1(){
+		int expected = 1;
+		creature.setZ(expected);
+		assertEquals(expected, creature.z());
+	}
+	
+	@Test
+	public void testZGettersAndSetters2(){
+		int expected = 2;
+		creature.setZ(expected);
+		assertEquals(expected, creature.z());
 	}
 }

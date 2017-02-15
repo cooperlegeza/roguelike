@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="creatureAIs.FungusAITest" time="0.001" errors="0" skipped="0">
+<testsuite tests="18" failures="0" name="creatureAIs.FungusAITest" time="0.12" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\devl\Java\jdk1.8.0_101\jre\bin"/>
@@ -63,5 +63,22 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="creatureAIs.FungusAITest" name="test" time="0.001"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testSetSpreadCount" time="0.084"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testSpreadCallsGetGoodLocations" time="0.009"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testSpreadOnlyCanPutOnTilesWithoutCreatures" time="0.004"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testOnUpdateTooHighSpreadCount" time="0.001"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testSpreadIncreasesSpreadCount" time="0.009"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testGetGoodXLocationCreatureDifferentX" time="0"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testGetGoodYLocationDifferentY" time="0"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testSpreadCreatesNewFungus" time="0.005"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testGetGoodXLocationLowest" time="0.001"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testGetSpreadCount" time="0"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testSpreadSetsNewCreaturesLocation" time="0.004"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testOnUpdateLowRandomChance" time="0"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testGetGoodYLocationHighest" time="0.001"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testGetGoodXLocationHighest" time="0"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testSpreadOnlyCanPutOnEmptyTiles" time="0"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testGetGoodYLocationLowest" time="0"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testOnUpdateNormalSpreadCount" time="0.001"/>
+  <testcase classname="creatureAIs.FungusAITest" name="testOnUpdateHighRandomChance" time="0.001"/>
 </testsuite>
