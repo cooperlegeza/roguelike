@@ -3,6 +3,7 @@ package creatures;
 import java.awt.Color;
 
 import creatureAIs.CreatureAI;
+import tiles.Tile;
 import utils.Grammar;
 import weapons.Weapon;
 import world.World;
@@ -71,18 +72,37 @@ public class Creature {
 		this.damageReduction = baseDamageReduction;
 	}
 	
-	public void moveBy(int xDistance, int yDistance){
+	public void moveBy(int xDistance, int yDistance, int zDistance){
 		int newX = x+xDistance;
 		int newY = y+yDistance;
-		if(newX >= 0 && newX < world.getLayer(z).getWidth() && newY >= 0 && newY < world.getLayer(z).getHeight()){
-			checkForObstaclesAndReactAccordingly(newX, newY);
+		int newZ = z+zDistance;
+		if(xInBounds(newX) && yInBounds(newY) && zInBounds(newZ)){
+			checkForObstaclesAndReactAccordingly(newX, newY, newZ);
 		}
 	}
 	
-	public void checkForObstaclesAndReactAccordingly(int newX, int newY){
-		Creature other = world.getLayer(z).getCreatureAt(newX, newY);
+	private boolean zInBounds(int z){
+		return (z >= 0 && z < world.getDepth());
+	}
+	
+	private boolean xInBounds(int x){
+		return (x >= 0 && x < world.getLayer(z).getWidth());
+	}
+	
+	private boolean yInBounds(int y){
+		return (y >= 0 && y < world.getLayer(z).getHeight());
+	}
+	
+	
+	public void checkForObstaclesAndReactAccordingly(int newX, int newY, int newZ){
+		Creature other = world.getCreatureAt(newX, newY, newZ);
+		Tile tile = world.getTile(newX, newY, newZ);
 		if(other == null){
-			ai.onEnter(newX, newY, world.getLayer(z).getTile(newX, newY));
+			if(tile.isStairs()){
+				
+			} else {
+				ai.onEnter(newX, newY, newZ, tile);	
+			}
 		} else {
 			attack(other);
 		}
@@ -98,7 +118,7 @@ public class Creature {
 	}
 	
 	public boolean canEnter(int x, int y){
-		return (x >= 0 && x < world.getLayer(z).getWidth() && y >= 0 && y < world.getLayer(z).getHeight())
+		return (xInBounds(x) && yInBounds(y))
 				&& world.getCreatureAt(x, y, z) == null && world.getLayer(z).getTile(x, y).isGround();
 	}
 	

@@ -12,20 +12,17 @@ public class WorldImpl implements World {
 	
 	private List<Layer> layers;
 	RogueMath math;
-	int depth;
 	private List<Creature> creatures;
 	
 	public WorldImpl(List<Layer> layers){
 		this.layers = layers;
 		math = new RogueMath();
-		this.depth = layers.size();
 		this.creatures = new LinkedList<Creature>();
 	}
 	
 	public WorldImpl(List<Layer> layers, RogueMath math){
 		this.math = math;
 		this.layers = layers;
-		this.depth = layers.size();
 		this.creatures = new LinkedList<Creature>();
 	}
 
@@ -46,7 +43,7 @@ public class WorldImpl implements World {
 
 	@Override
 	public void addAtEmptyLocation(Creature creature) {
-		int layer = (int)(math.random()*depth);
+		int layer = (int)(math.random()*layers.size());
 		creatures.add(creature);
 		layers.get(layer).addAtEmptyLocation(creature);
 	}
@@ -88,6 +85,10 @@ public class WorldImpl implements World {
 	@Override
 	public void addCreature(Creature creature){
 		creatures.add(creature);
+	}
+	
+	public int getDepth(){
+		return layers.size();
 	}
 
 }

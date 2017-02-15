@@ -42,5 +42,23 @@ public class DownStairsTileTest {
 		down.setPartner(partner);
 		assertEquals(partner, down.getPartner());
 	}
+	
+	@Test
+	public void testPartnerLocGettersAndSetters(){
+		int expectedX = 2;
+		int expectedY = 3;
+		int expectedZ = 8;
+		down.setPartnerLoc(2, 3, 8);
+		int[] location = down.getPartnerLoc();
+		assertEquals(expectedX, location[0]);
+		assertEquals(expectedY, location[1]);
+		assertEquals(expectedZ, location[2]);
+	}
+	
+	@Test
+	public void testIsStairs(){
+		boolean stairs = true;
+		assertEquals(stairs, down.isStairs());
+	}
 
 }

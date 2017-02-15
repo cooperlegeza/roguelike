@@ -148,8 +148,8 @@ public class PlayScreen implements Screen {
 		centerY = Math.max(0, Math.min(centerY + moveY, getLayerHeight() - 1));
 	}
 	
-	public void moveBy(int moveX, int moveY){
-		player.moveBy(moveX, moveY);
+	public void moveBy(int moveX, int moveY, int moveZ){
+		player.moveBy(moveX, moveY, moveZ);
 	}
 	
 	public Creature getPlayer(){

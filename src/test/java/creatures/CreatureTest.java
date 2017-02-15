@@ -46,7 +46,9 @@ public class CreatureTest {
 				{new WallTile(), new WallTile(), new FloorTile(), new FloorTile()},
 		};
 		layer = new Layer(tiles, world);
+		Layer newLayer = new Layer(tiles, world);
 		layers.add(layer);
+		layers.add(newLayer);
 		creature = Mockito.spy(new Creature(world, '@', AsciiPanel.green, 100));
 		Fists fists = Mockito.mock(Fists.class);
 		creature.setBaseWeapon(fists);
@@ -68,46 +70,46 @@ public class CreatureTest {
 	public void testMoveBy(){
 		creature.setX(1);
 		creature.setY(1);
-		creature.moveBy(1, 1);
-		verify(creature, times(1)).checkForObstaclesAndReactAccordingly(2, 2);
+		creature.moveBy(1, 1, 0);
+		verify(creature, times(1)).checkForObstaclesAndReactAccordingly(2, 2, 0);
 	}
 	
 	@Test
 	public void testMoveByNextToEdgeOfMapSouth(){
 		creature.setX(2);
 		creature.setY(3);
-		creature.moveBy(0, 1);
-		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(2, 4);
+		creature.moveBy(0, 1, 0);
+		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(2, 4, creature.z());
 	}
 	
 	@Test
 	public void testMoveByNextToEdgeOfMapNorth(){
 		creature.setX(2);
 		creature.setY(0);
-		creature.moveBy(0, -1);
-		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(2, -1);
+		creature.moveBy(0, -1, 0);
+		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(2, -1, creature.z());
 	}
 	
 	@Test
 	public void testMoveByNextToEdgeOfMapEast(){
 		creature.setX(3);
 		creature.setY(2);
-		creature.moveBy(1, 0);
-		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(4, 2);
+		creature.moveBy(1, 0, 0);
+		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(4, 2, creature.z());
 	}
 	
 	@Test
 	public void testMoveByNextToEdgeOfMapWest(){
 		creature.setX(0);
 		creature.setY(2);
-		creature.moveBy(-1, 0);
-		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(-1, 2);
+		creature.moveBy(-1, 0, 0);
+		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(-1, 2, creature.z());
 	}
 	
 	@Test
 	public void testCheckForObstaclesAndReactAccordinglyNoCreature(){
-		creature.checkForObstaclesAndReactAccordingly(2, 2);
-		verify(creatureAISpy, times(1)).onEnter(2, 2, layer.getTile(2, 2));
+		creature.checkForObstaclesAndReactAccordingly(2, 2, creature.z());
+		verify(creatureAISpy, times(1)).onEnter(2, 2, creature.z(), layer.getTile(2, 2));
 	}
 	
 	@Test
@@ -117,7 +119,7 @@ public class CreatureTest {
 		world.setCreatureAt(3, 2, 0, newCreature);
 		creature.setX(2);
 		creature.setY(2);
-		creature.moveBy(1, 0);
+		creature.moveBy(1, 0, 0);
 		verify(creature, times(1)).attack(newCreature);
 	}
 	
@@ -263,5 +265,32 @@ public class CreatureTest {
 		int expected = 2;
 		creature.setZ(expected);
 		assertEquals(expected, creature.z());
+	}
+	
+	@Test
+	public void testMoveByZ(){
+		creature.setX(0);
+		creature.setY(0);
+		creature.setZ(0);
+		creature.moveBy(0, 0, 1);
+		verify(creature, times(1)).checkForObstaclesAndReactAccordingly(0, 0, 1);
+	}
+	
+	@Test
+	public void testMoveByZAtTop(){
+		creature.setX(0);
+		creature.setY(0);
+		creature.setZ(0);
+		creature.moveBy(0, 0, -1);
+		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(0, 0, -1);
+	}
+	
+	@Test
+	public void testMoveByZAtBottom(){
+		creature.setX(0);
+		creature.setY(0);
+		creature.setZ(1);
+		creature.moveBy(0, 0, 1);
+		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(0, 0, 2);
 	}
 }

@@ -138,5 +138,11 @@ public class WorldTest {
 			verify(creature, times(1)).update();
 		}
 	}
+	
+	@Test
+	public void testGetDepth(){
+		int expectedDepth = 3;
+		assertEquals(expectedDepth, world.getDepth());
+	}
 
 }

@@ -58,5 +58,11 @@ public class DoorTileTest {
 		door.changeDoorState();
 		assertEquals(ground, door.isGround());
 	}
+	
+	@Test
+	public void testIsStairs(){
+		boolean stairs = false;
+		assertEquals(stairs, door.isStairs());
+	}
 
 }

@@ -19,4 +19,5 @@ public interface World {
 	public Layer getLayer(int z);
 	public void addCreature(Creature creature);
 	public void update();
+	public int getDepth();
 }

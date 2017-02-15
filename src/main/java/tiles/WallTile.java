@@ -9,11 +9,13 @@ public class WallTile implements Tile {
 	private char symbol;
 	private Color color;
 	private boolean ground;
+	private boolean stairs;
 	
 	public WallTile(){
 		this.symbol = '#';
 		this.color = AsciiPanel.brightWhite;
 		this.ground = false;
+		stairs = false;
 	}
 
 	@Override
@@ -29,6 +31,11 @@ public class WallTile implements Tile {
 	@Override
 	public boolean isGround() {
 		return ground;
+	}
+
+	@Override
+	public boolean isStairs() {
+		return stairs;
 	}
 
 }

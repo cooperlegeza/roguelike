@@ -36,6 +36,7 @@ public class PlayerAITest {
 		player.setCreatureAI(playerAI);
 		player.setX(5);
 		player.setY(5);
+		player.setZ(0);
 	}
 
 	@Test
@@ -43,9 +44,11 @@ public class PlayerAITest {
 		tile = new FloorTile();
 		int x = 5;
 		int y = 6;
-		playerAI.onEnter(x, y, tile);
+		int z = 0;
+		playerAI.onEnter(x, y, z, tile);
 		assertEquals(x, player.x());
 		assertEquals(y, player.y());
+		assertEquals(z, player.z());
 	}
 	
 	@Test
@@ -53,11 +56,14 @@ public class PlayerAITest {
 		tile = new WallTile();
 		int x = 5;
 		int y = 6;
+		int z = 0;
 		int expectedX = 5;
 		int expectedY = 5;
-		playerAI.onEnter(x, y, tile);
+		int expectedZ = 0;
+		playerAI.onEnter(x, y, z, tile);
 		assertEquals(expectedX, player.x());
 		assertEquals(expectedY, player.y());
+		assertEquals(expectedZ, player.z());
 	}
 	
 	@Test

@@ -10,12 +10,14 @@ public class DoorTile implements Tile {
 	private Color color;
 	private boolean open;
 	private boolean ground;
+	private boolean stairs;
 	
 	public DoorTile(){
 		symbol = '+';
 		color = AsciiPanel.red;
 		open = false;
 		ground = open;
+		stairs = false;
 	}
 
 	@Override
@@ -45,6 +47,11 @@ public class DoorTile implements Tile {
 	@Override
 	public boolean isGround() {
 		return ground;
+	}
+
+	@Override
+	public boolean isStairs() {
+		return stairs;
 	}
 
 }

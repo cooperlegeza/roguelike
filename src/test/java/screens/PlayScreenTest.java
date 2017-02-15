@@ -144,8 +144,8 @@ public class PlayScreenTest {
 	public void testMoveBy(){
 		Creature playerSpy = Mockito.spy(playScreen.getPlayer());
 		playScreen.setPlayer(playerSpy);
-		playScreen.moveBy(1, 1);
-		verify(playerSpy, times(1)).moveBy(1, 1);
+		playScreen.moveBy(1, 1, 0);
+		verify(playerSpy, times(1)).moveBy(1, 1, 0);
 	}
 	
 	@Test

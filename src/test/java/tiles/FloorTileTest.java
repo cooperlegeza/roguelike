@@ -31,5 +31,11 @@ public class FloorTileTest {
 		boolean ground = true;
 		assertEquals(ground, floor.isGround());
 	}
+	
+	@Test
+	public void testIsStairs(){
+		boolean stairs = false;
+		assertEquals(stairs, floor.isStairs());
+	}
 
 }

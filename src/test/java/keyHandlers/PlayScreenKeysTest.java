@@ -60,9 +60,23 @@ public class PlayScreenKeysTest {
 		for(int key : keyNums.keySet()){
 			when(mockedKey.getKeyCode()).thenReturn(key);
 			assertThat(playScreenKeys.respondToUserInput(mockedKey, playScreen), instanceOf(keyNums.get(key)));
-			verify(playScreen, times(times)).moveBy(anyInt(), anyInt());
+			verify(playScreen, times(times)).moveBy(anyInt(), anyInt(), anyInt());
 			times++;
 		}
+	}
+	
+	@Test
+	public void testRespondToUserInputLeftCaretKey() {
+		when(mockedKey.getKeyChar()).thenReturn('<');
+		assertThat(playScreenKeys.respondToUserInput(mockedKey, playScreen), instanceOf(PlayScreen.class));
+		verify(playScreen, times(1)).moveBy(0, 0, -1);
+	}
+	
+	@Test
+	public void testRespondToUserInputRightCaretKey() {
+		when(mockedKey.getKeyChar()).thenReturn('>');
+		assertThat(playScreenKeys.respondToUserInput(mockedKey, playScreen), instanceOf(PlayScreen.class));
+		verify(playScreen, times(1)).moveBy(0, 0, 1);
 	}
 
 }

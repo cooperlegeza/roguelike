@@ -9,12 +9,16 @@ public class UpStairsTile implements Tile {
 	private char symbol;
 	private Color color;
 	private boolean isGround;
+	private boolean stairs;
 	private Tile partner;
+	private int[] partnerLoc;
 	
 	public UpStairsTile(){
 		symbol = '<';
 		color = AsciiPanel.brightYellow;
 		isGround = true;
+		partnerLoc = new int[3];
+		stairs = true;
 	}
 
 	@Override
@@ -28,5 +32,17 @@ public class UpStairsTile implements Tile {
 	
 	public void setPartner(Tile partner) {this.partner = partner;}
 	public Tile getPartner() {return partner;}
+	
+	public void setPartnerLoc(int x, int y, int z){
+		partnerLoc[0] = x;
+		partnerLoc[1] = y;
+		partnerLoc[2] = z;
+	}
+	public int[] getPartnerLoc(){return partnerLoc;}
+
+	@Override
+	public boolean isStairs() {
+		return stairs;
+	}
 
 }
