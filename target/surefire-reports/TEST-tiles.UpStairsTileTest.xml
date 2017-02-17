@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="tiles.UpStairsTileTest" time="0" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="tiles.UpStairsTileTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\devl\Java\jdk1.8.0_101\jre\bin"/>
@@ -63,8 +63,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
+  <testcase classname="tiles.UpStairsTileTest" name="testPartnerLocGettersAndSetters" time="0"/>
   <testcase classname="tiles.UpStairsTileTest" name="testColorGetters" time="0"/>
+  <testcase classname="tiles.UpStairsTileTest" name="testIsLitOnInit" time="0"/>
+  <testcase classname="tiles.UpStairsTileTest" name="testChangeLitState" time="0"/>
   <testcase classname="tiles.UpStairsTileTest" name="testIsGround" time="0"/>
+  <testcase classname="tiles.UpStairsTileTest" name="testBlocksVision" time="0"/>
+  <testcase classname="tiles.UpStairsTileTest" name="testIsStairs" time="0"/>
   <testcase classname="tiles.UpStairsTileTest" name="testPartnerGettersAndSetters" time="0"/>
   <testcase classname="tiles.UpStairsTileTest" name="testCharGetters" time="0"/>
 </testsuite>

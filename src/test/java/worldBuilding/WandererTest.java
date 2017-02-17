@@ -553,11 +553,11 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter3(){
 		wandererSpy.makeOpenSpace(3);
 		Coordinate[] coordinates = {
-				new Coordinate(4, 5),
-				new Coordinate(5, 5),
-				new Coordinate(6, 5),
-				new Coordinate(5, 6),
-				new Coordinate(5, 4)
+				new Coordinate(4, 5, 0),
+				new Coordinate(5, 5, 0),
+				new Coordinate(6, 5, 0),
+				new Coordinate(5, 6, 0),
+				new Coordinate(5, 4, 0)
 		};
 		
 		for(Coordinate coordinate: coordinates){
@@ -569,19 +569,19 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter5(){
 		wandererSpy.makeOpenSpace(5);
 		Coordinate[] coordinates = {
-				new Coordinate(3, 5),
-				new Coordinate(4, 5),
-				new Coordinate(5, 5),
-				new Coordinate(6, 5),
-				new Coordinate(7, 5),
-				new Coordinate(4, 6),
-				new Coordinate(5, 6),
-				new Coordinate(6, 6),
-				new Coordinate(4, 4),
-				new Coordinate(5, 4),
-				new Coordinate(6, 4),
-				new Coordinate(5, 3),
-				new Coordinate(5, 7)
+				new Coordinate(3, 5, 0),
+				new Coordinate(4, 5, 0),
+				new Coordinate(5, 5, 0),
+				new Coordinate(6, 5, 0),
+				new Coordinate(7, 5, 0),
+				new Coordinate(4, 6, 0),
+				new Coordinate(5, 6, 0),
+				new Coordinate(6, 6, 0),
+				new Coordinate(4, 4, 0),
+				new Coordinate(5, 4, 0),
+				new Coordinate(6, 4, 0),
+				new Coordinate(5, 3, 0),
+				new Coordinate(5, 7, 0)
 		};
 		
 		for(Coordinate coordinate : coordinates){
@@ -593,31 +593,31 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter7(){
 		wandererSpy.makeOpenSpace(7);
 		Coordinate[] coordinates = {
-				new Coordinate(2, 5),
-				new Coordinate(3, 5),
-				new Coordinate(4, 5),
-				new Coordinate(5, 5),
-				new Coordinate(6, 5),
-				new Coordinate(7, 5),
-				new Coordinate(8, 5),
-				new Coordinate(3, 6),
-				new Coordinate(4, 6),
-				new Coordinate(5, 6),
-				new Coordinate(6, 6),
-				new Coordinate(7, 6),
-				new Coordinate(3, 4),
-				new Coordinate(4, 4),
-				new Coordinate(5, 4),
-				new Coordinate(6, 4),
-				new Coordinate(7, 4),
-				new Coordinate(4, 3),
-				new Coordinate(5, 3),
-				new Coordinate(6, 3),
-				new Coordinate(4, 7),
-				new Coordinate(5, 7),
-				new Coordinate(6, 7),
-				new Coordinate(5, 3),
-				new Coordinate(5, 8)
+				new Coordinate(2, 5, 0),
+				new Coordinate(3, 5, 0),
+				new Coordinate(4, 5, 0),
+				new Coordinate(5, 5, 0),
+				new Coordinate(6, 5, 0),
+				new Coordinate(7, 5, 0),
+				new Coordinate(8, 5, 0),
+				new Coordinate(3, 6, 0),
+				new Coordinate(4, 6, 0),
+				new Coordinate(5, 6, 0),
+				new Coordinate(6, 6, 0),
+				new Coordinate(7, 6, 0),
+				new Coordinate(3, 4, 0),
+				new Coordinate(4, 4, 0),
+				new Coordinate(5, 4, 0),
+				new Coordinate(6, 4, 0),
+				new Coordinate(7, 4, 0),
+				new Coordinate(4, 3, 0),
+				new Coordinate(5, 3, 0),
+				new Coordinate(6, 3, 0),
+				new Coordinate(4, 7, 0),
+				new Coordinate(5, 7, 0),
+				new Coordinate(6, 7, 0),
+				new Coordinate(5, 3, 0),
+				new Coordinate(5, 8, 0)
 		};
 		for(Coordinate coordinate : coordinates){
 			assertThat(wandererSpy.getTile(coordinate.x, coordinate.y), instanceOf(FloorTile.class));
@@ -628,15 +628,15 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter5AtWestWall(){
 		wandererSpy.moveTo(0, 5);
 		Coordinate[] coordinates = {
-				new Coordinate(0, 5),
-				new Coordinate(1, 5),
-				new Coordinate(2, 5),
-				new Coordinate(0, 6),
-				new Coordinate(1, 6),
-				new Coordinate(0, 7),
-				new Coordinate(0, 4),
-				new Coordinate(1, 4),
-				new Coordinate(0, 3)
+				new Coordinate(0, 5, 0),
+				new Coordinate(1, 5, 0),
+				new Coordinate(2, 5, 0),
+				new Coordinate(0, 6, 0),
+				new Coordinate(1, 6, 0),
+				new Coordinate(0, 7, 0),
+				new Coordinate(0, 4, 0),
+				new Coordinate(1, 4, 0),
+				new Coordinate(0, 3, 0)
 		};
 		wandererSpy.makeOpenSpace(5);
 		for(Coordinate coordinate : coordinates){
@@ -648,15 +648,15 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter5AtEastWall(){
 		wandererSpy.moveTo(wandererSpy.getWidth()-1, 5);
 		Coordinate[] coordinates = {
-				new Coordinate(9, 5),
-				new Coordinate(8, 5),
-				new Coordinate(7, 5),
-				new Coordinate(9, 6),
-				new Coordinate(8, 6),
-				new Coordinate(9, 7),
-				new Coordinate(9, 4),
-				new Coordinate(8, 4),
-				new Coordinate(9, 3)
+				new Coordinate(9, 5, 0),
+				new Coordinate(8, 5, 0),
+				new Coordinate(7, 5, 0),
+				new Coordinate(9, 6, 0),
+				new Coordinate(8, 6, 0),
+				new Coordinate(9, 7, 0),
+				new Coordinate(9, 4, 0),
+				new Coordinate(8, 4, 0),
+				new Coordinate(9, 3, 0)
 		};
 		wandererSpy.makeOpenSpace(5);
 		for(Coordinate coordinate : coordinates){
@@ -668,15 +668,15 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter5AtNorthWall(){
 		wandererSpy.moveTo(5, 0);
 		Coordinate[] coordinates = {
-				new Coordinate(3, 0),
-				new Coordinate(4, 0),
-				new Coordinate(5, 0),
-				new Coordinate(6, 0),
-				new Coordinate(7, 0),
-				new Coordinate(4, 1),
-				new Coordinate(5, 1),
-				new Coordinate(6, 1),
-				new Coordinate(5, 2)
+				new Coordinate(3, 0, 0),
+				new Coordinate(4, 0, 0),
+				new Coordinate(5, 0, 0),
+				new Coordinate(6, 0, 0),
+				new Coordinate(7, 0, 0),
+				new Coordinate(4, 1, 0),
+				new Coordinate(5, 1, 0),
+				new Coordinate(6, 1, 0),
+				new Coordinate(5, 2, 0)
 		};
 		wandererSpy.makeOpenSpace(5);
 		for(Coordinate coordinate : coordinates){
@@ -688,15 +688,15 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter5AtSouthWall(){
 		wandererSpy.moveTo(5, wandererSpy.getHeight()-1);
 		Coordinate[] coordinates = {
-				new Coordinate(3, 9),
-				new Coordinate(4, 9),
-				new Coordinate(5, 9),
-				new Coordinate(6, 9),
-				new Coordinate(7, 9),
-				new Coordinate(4, 8),
-				new Coordinate(5, 8),
-				new Coordinate(6, 8),
-				new Coordinate(5, 7)
+				new Coordinate(3, 9, 0),
+				new Coordinate(4, 9, 0),
+				new Coordinate(5, 9, 0),
+				new Coordinate(6, 9, 0),
+				new Coordinate(7, 9, 0),
+				new Coordinate(4, 8, 0),
+				new Coordinate(5, 8, 0),
+				new Coordinate(6, 8, 0),
+				new Coordinate(5, 7, 0)
 		};
 		wandererSpy.makeOpenSpace(5);
 		for(Coordinate coordinate : coordinates){
@@ -707,18 +707,18 @@ public class WandererTest {
 	@Test
 	public void testMakeOpenSpaceDiameter4(){
 		Coordinate[] coordinates = {
-				new Coordinate(4, 5),
-				new Coordinate(5, 5),
-				new Coordinate(6, 5),
-				new Coordinate(7, 5),
-				new Coordinate(4, 6),
-				new Coordinate(5, 6),
-				new Coordinate(6, 6),
-				new Coordinate(7, 6),
-				new Coordinate(5, 4),
-				new Coordinate(6, 4),
-				new Coordinate(5, 7),
-				new Coordinate(6, 7)
+				new Coordinate(4, 5, 0),
+				new Coordinate(5, 5, 0),
+				new Coordinate(6, 5, 0),
+				new Coordinate(7, 5, 0),
+				new Coordinate(4, 6, 0),
+				new Coordinate(5, 6, 0),
+				new Coordinate(6, 6, 0),
+				new Coordinate(7, 6, 0),
+				new Coordinate(5, 4, 0),
+				new Coordinate(6, 4, 0),
+				new Coordinate(5, 7, 0),
+				new Coordinate(6, 7, 0)
 		};
 		
 		wandererSpy.makeOpenSpace(4);
@@ -730,30 +730,30 @@ public class WandererTest {
 	@Test
 	public void testMakeOpenSpaceDiameter6(){
 		Coordinate[] coordinates = {
-				new Coordinate(3, 5),
-				new Coordinate(4, 5),
-				new Coordinate(5, 5),
-				new Coordinate(6, 5),
-				new Coordinate(7, 5),
-				new Coordinate(8, 5),
-				new Coordinate(3, 6),
-				new Coordinate(4, 6),
-				new Coordinate(5, 6),
-				new Coordinate(6, 6),
-				new Coordinate(7, 6),
-				new Coordinate(8, 6),
-				new Coordinate(4, 4),
-				new Coordinate(5, 4),
-				new Coordinate(6, 4),
-				new Coordinate(7, 4),
-				new Coordinate(4, 7),
-				new Coordinate(5, 7),
-				new Coordinate(6, 7),
-				new Coordinate(7, 7),
-				new Coordinate(5, 3),
-				new Coordinate(6, 3),
-				new Coordinate(5, 8),
-				new Coordinate(6, 8)
+				new Coordinate(3, 5, 0),
+				new Coordinate(4, 5, 0),
+				new Coordinate(5, 5, 0),
+				new Coordinate(6, 5, 0),
+				new Coordinate(7, 5, 0),
+				new Coordinate(8, 5, 0),
+				new Coordinate(3, 6, 0),
+				new Coordinate(4, 6, 0),
+				new Coordinate(5, 6, 0),
+				new Coordinate(6, 6, 0),
+				new Coordinate(7, 6, 0),
+				new Coordinate(8, 6, 0),
+				new Coordinate(4, 4, 0),
+				new Coordinate(5, 4, 0),
+				new Coordinate(6, 4, 0),
+				new Coordinate(7, 4, 0),
+				new Coordinate(4, 7, 0),
+				new Coordinate(5, 7, 0),
+				new Coordinate(6, 7, 0),
+				new Coordinate(7, 7, 0),
+				new Coordinate(5, 3, 0),
+				new Coordinate(6, 3, 0),
+				new Coordinate(5, 8, 0),
+				new Coordinate(6, 8, 0)
 		};
 		
 		wandererSpy.makeOpenSpace(6);
@@ -766,16 +766,16 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter4AtWestWall(){
 		wandererSpy.moveTo(0, 5);
 		Coordinate[] coordinates = {
-				new Coordinate(0, 5),
-				new Coordinate(1, 5),
-				new Coordinate(2, 5),
-				new Coordinate(0, 6),
-				new Coordinate(1, 6),
-				new Coordinate(2, 6),
-				new Coordinate(0, 4),
-				new Coordinate(1, 4),
-				new Coordinate(0, 7),
-				new Coordinate(1, 7)
+				new Coordinate(0, 5, 0),
+				new Coordinate(1, 5, 0),
+				new Coordinate(2, 5, 0),
+				new Coordinate(0, 6, 0),
+				new Coordinate(1, 6, 0),
+				new Coordinate(2, 6, 0),
+				new Coordinate(0, 4, 0),
+				new Coordinate(1, 4, 0),
+				new Coordinate(0, 7, 0),
+				new Coordinate(1, 7, 0)
 		};
 		
 		wandererSpy.makeOpenSpace(4);
@@ -788,12 +788,12 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter4AtEastWall(){
 		wandererSpy.moveTo(wandererSpy.getWidth()-1, 5);
 		Coordinate[] coordinates = {
-				new Coordinate(9, 5),
-				new Coordinate(8, 5),
-				new Coordinate(9, 6),
-				new Coordinate(8, 6),
-				new Coordinate(9, 4),
-				new Coordinate(9, 7)
+				new Coordinate(9, 5, 0),
+				new Coordinate(8, 5, 0),
+				new Coordinate(9, 6, 0),
+				new Coordinate(8, 6, 0),
+				new Coordinate(9, 4, 0),
+				new Coordinate(9, 7, 0)
 		};
 		
 		wandererSpy.makeOpenSpace(4);
@@ -806,12 +806,12 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter4AtSouthWall(){
 		wandererSpy.moveTo(5, wandererSpy.getHeight()-1);
 		Coordinate[] coordinates = {
-				new Coordinate(4, 9),
-				new Coordinate(5, 9),
-				new Coordinate(6, 9),
-				new Coordinate(7, 9),
-				new Coordinate(5, 8),
-				new Coordinate(6, 8),
+				new Coordinate(4, 9, 0),
+				new Coordinate(5, 9, 0),
+				new Coordinate(6, 9, 0),
+				new Coordinate(7, 9, 0),
+				new Coordinate(5, 8, 0),
+				new Coordinate(6, 8, 0),
 		};
 		
 		wandererSpy.makeOpenSpace(4);
@@ -824,26 +824,21 @@ public class WandererTest {
 	public void testMakeOpenSpaceDiameter4AtNorthWall(){
 		wandererSpy.moveTo(5, 0);
 		Coordinate[] coordinates = {
-				new Coordinate(4, 0),
-				new Coordinate(5, 0),
-				new Coordinate(6, 0),
-				new Coordinate(7, 0),
-				new Coordinate(4, 1),
-				new Coordinate(5, 1),
-				new Coordinate(6, 1),
-				new Coordinate(7, 1),
-				new Coordinate(5, 2),
-				new Coordinate(6, 2),
+				new Coordinate(4, 0, 0),
+				new Coordinate(5, 0, 0),
+				new Coordinate(6, 0, 0),
+				new Coordinate(7, 0, 0),
+				new Coordinate(4, 1, 0),
+				new Coordinate(5, 1, 0),
+				new Coordinate(6, 1, 0),
+				new Coordinate(7, 1, 0),
+				new Coordinate(5, 2, 0),
+				new Coordinate(6, 2, 0),
 		};
 		
 		wandererSpy.makeOpenSpace(4);
 		for(Coordinate coordinate : coordinates){
 			assertThat(wandererSpy.getTile(coordinate.x, coordinate.y), instanceOf(FloorTile.class));
 		}
-	}
-	
-	@Test
-	public void testMakeChild(){
-		
 	}
 }

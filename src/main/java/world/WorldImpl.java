@@ -45,7 +45,7 @@ public class WorldImpl implements World {
 	public void addAtEmptyLocation(Creature creature) {
 		int layer = (int)(math.random()*layers.size());
 		creatures.add(creature);
-		layers.get(layer).addAtEmptyLocation(creature);
+		layers.get(layer).addAtEmptyLocation(creature, layer);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class WorldImpl implements World {
 	@Override
 	public void setCreatureAt(int x, int y, int z, Creature creature) {
 		creature.setZ(z);
-		layers.get(z).setCreatureAt(x, y, creature);
+		layers.get(z).setCreatureAt(x, y, z, creature);
 		creatures.add(creature);
 	}
 
@@ -89,6 +89,17 @@ public class WorldImpl implements World {
 	
 	public int getDepth(){
 		return layers.size();
+	}
+	
+	public void setTileAt(int x, int y, int z, Tile newTile){
+		layers.get(z).setTileAt(x, y, newTile);
+	}
+	
+	@Override
+	public void addAtEmptyLocation(Creature creature, int layer){
+		addCreature(creature);
+		layers.get(layer).addAtEmptyLocation(creature, layer);
+		
 	}
 
 }

@@ -41,7 +41,8 @@ public class CreatureFactoryTest {
 	@Test
 	public void testNewPlayerCallsAddAtEmptyLocationFromWorld(){
 		Creature player = factory.newPlayer();
-		verify(world, times(1)).addAtEmptyLocation(player);
+		int firstLayer = 0;
+		verify(world, times(1)).addAtEmptyLocation(player, firstLayer);
 	}
 	
 	@Test

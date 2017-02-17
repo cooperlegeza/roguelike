@@ -16,7 +16,7 @@ public class CavernBuilder {
 		this.width = width;
 		this.height = height;
 		this.tiles = new Tile[this.width][this.height];
-		this.method = new Flood();
+		this.method = new Wanderer(width, height);
 		this.wallUp();
 		method.setTiles(tiles);
 	}

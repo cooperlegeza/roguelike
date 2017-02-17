@@ -12,6 +12,7 @@ public class UpStairsTile implements Tile {
 	private boolean stairs;
 	private Tile partner;
 	private int[] partnerLoc;
+	private boolean isLit;
 	
 	public UpStairsTile(){
 		symbol = '<';
@@ -19,6 +20,7 @@ public class UpStairsTile implements Tile {
 		isGround = true;
 		partnerLoc = new int[3];
 		stairs = true;
+		isLit = false;
 	}
 
 	@Override
@@ -43,6 +45,21 @@ public class UpStairsTile implements Tile {
 	@Override
 	public boolean isStairs() {
 		return stairs;
+	}
+
+	@Override
+	public boolean blocksVision() {
+		return false;
+	}
+
+	@Override
+	public boolean isLit() {
+		return isLit;
+	}
+
+	@Override
+	public void changeLitState() {
+		isLit = !isLit;
 	}
 
 }

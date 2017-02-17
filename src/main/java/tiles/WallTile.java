@@ -10,12 +10,14 @@ public class WallTile implements Tile {
 	private Color color;
 	private boolean ground;
 	private boolean stairs;
+	private boolean isLit;
 	
 	public WallTile(){
 		this.symbol = '#';
 		this.color = AsciiPanel.brightWhite;
 		this.ground = false;
 		stairs = false;
+		isLit = false;
 	}
 
 	@Override
@@ -36,6 +38,31 @@ public class WallTile implements Tile {
 	@Override
 	public boolean isStairs() {
 		return stairs;
+	}
+	
+	@Override
+	public Tile getPartner(){
+		return null;
+	}
+	
+	@Override
+	public int[] getPartnerLoc(){
+		return null;
+	}
+
+	@Override
+	public boolean blocksVision() {
+		return true;
+	}
+
+	@Override
+	public boolean isLit() {
+		return isLit;
+	}
+
+	@Override
+	public void changeLitState() {
+		isLit = !isLit;
 	}
 
 }

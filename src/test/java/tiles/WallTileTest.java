@@ -37,5 +37,30 @@ public class WallTileTest {
 		boolean stairs = false;
 		assertEquals(stairs, wall.isStairs());
 	}
+	
+	@Test
+	public void testPartnerMethods(){
+		assertNull(wall.getPartner());
+		assertNull(wall.getPartnerLoc());
+	}
+	
+	@Test
+	public void testBlocksVision(){
+		boolean blocksVision = true;
+		assertEquals(blocksVision, wall.blocksVision());
+	}
+	
+	@Test
+	public void testIsLitOnInit(){
+		boolean isLit = false;
+		assertEquals(isLit, wall.isLit());
+	}
+	
+	@Test
+	public void testChangeLitState(){
+		boolean isLit = true;
+		wall.changeLitState();
+		assertEquals(isLit, wall.isLit());
+	}
 
 }

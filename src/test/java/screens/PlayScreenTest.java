@@ -62,8 +62,7 @@ public class PlayScreenTest {
 	@Test
 	public void testCreateWorld(){
 		PlayScreen playScreenNew = new PlayScreen(builder);
-//		The below line works in this suite, but not in Maven. Aggravating.
-//		verify(builder, times(10)).build(any());
+		verify(builder, times(1)).build(any());
 		assertThat(playScreenNew, instanceOf(PlayScreen.class));
 	}
 	
@@ -79,23 +78,18 @@ public class PlayScreenTest {
 		assertEquals(expectedCenterY, playScreen.getCenterY());
 	}
 	
-	/* 
-	 * There are some weird interactions between the Mockito verify and Maven tests. 
-	 * These next two tests work in the actual test suite, but not while in the maven tests.
-	 * Something to do with verify not seeing that some objects descend from object. Don't know why.
-	 */
-//	@Test
-//	public void testDisplayTiles(){
-//		playScreen.displayTiles(mockedAsciiPanel, 10, 10);
-//		verify(mockedAsciiPanel, times(80*21)).write(anyChar(), anyInt(), anyInt(), any());
-//	}
-//	
-//	@Test
-//	public void testDisplayOutPutCallsDisplayTiles(){
-//		PlayScreen playScreenSpy = Mockito.spy(playScreen);
-//		playScreenSpy.displayOutput(mockedAsciiPanel);
-//		verify(playScreenSpy, times(1)).displayTiles(any(), anyInt(), anyInt());
-//	}
+	@Test
+	public void testDisplayTiles(){
+		playScreen.displayTiles(mockedAsciiPanel, 10, 10);
+		verify(mockedAsciiPanel, times(80*21)).write(anyChar(), anyInt(), anyInt(), any());
+	}
+	
+	@Test
+	public void testDisplayOutPutCallsDisplayTiles(){
+		PlayScreen playScreenSpy = Mockito.spy(playScreen);
+		playScreenSpy.displayOutput(mockedAsciiPanel);
+		verify(playScreenSpy, times(1)).displayTiles(any(), anyInt(), anyInt());
+	}
 	
 	@Test
 	public void testScrollBy(){
@@ -141,14 +135,6 @@ public class PlayScreenTest {
 	}
 	
 	@Test
-	public void testMoveBy(){
-		Creature playerSpy = Mockito.spy(playScreen.getPlayer());
-		playScreen.setPlayer(playerSpy);
-		playScreen.moveBy(1, 1, 0);
-		verify(playerSpy, times(1)).moveBy(1, 1, 0);
-	}
-	
-	@Test
 	public void testSetAndGetWorld(){
 		Tile[][] tiles = {
 				{new FloorTile(), new FloorTile(), new FloorTile(),new FloorTile()},
@@ -175,8 +161,7 @@ public class PlayScreenTest {
 		playScreen.setWorld(mockedWorld);
 		playScreen.displayCreatures(1, 1, mockedAsciiPanel);
 		verify(mockedWorld, times(1)).getCreatures();
-		//Below is failing in Maven but not in Eclipse
-//		verify(mockedAsciiPanel, times(creatures.size())).write(anyChar(), anyInt(), anyInt(), any());
+		verify(mockedAsciiPanel, times(creatures.size())).write(anyChar(), anyInt(), anyInt(), any());
 	}
 	
 	@Test

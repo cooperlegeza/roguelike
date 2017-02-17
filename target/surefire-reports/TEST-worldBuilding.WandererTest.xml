@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="77" failures="0" name="worldBuilding.WandererTest" time="0.027" errors="0" skipped="0">
+<testsuite tests="76" failures="0" name="worldBuilding.WandererTest" time="0.028" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\devl\Java\jdk1.8.0_101\jre\bin"/>
@@ -63,35 +63,35 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintCannotGoBeyondMapEast" time="0.001"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintCannotGoBeyondMapWest" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintCannotGoBeyondMapEast" time="0.004"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintCannotGoBeyondMapWest" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testInitWithDifferentWidth" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5AtEastWall" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5AtEastWall" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testGetTiles" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testGetWidth" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeSouthAndFacingSouth" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testGetWidth" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeSouthAndFacingSouth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testCannotMoveToOffMapNegativeX" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testCannotMoveToOffMapNegativeY" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeNorthAndFacingNorth" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeNorthAndFacingNorth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5AtWestWall" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsNorthDistanceMoreThanHeight" time="0.001"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintCannotGoBeyondMapNorth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsNorthDistanceMoreThanHeight" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintCannotGoBeyondMapNorth" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintCannotGoBeyondMapSouth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testGetX" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testGetY" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testGetY" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testStep" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesNorthTooFar" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter4AtSouthWall" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintNorth" time="0.001"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintSouth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintNorth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintSouth" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testGetXAfterMovement" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5AtSouthWall" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5AtSouthWall" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeSouthAndNotFacingSouth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintedTiles" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter3" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter4" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter6" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter6" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter7" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testInitWithDifferentHeight" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testWanderCallsChangeFacingIfAtEdge" time="0.001"/>
@@ -100,43 +100,42 @@
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter2AtWestWall" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter4AtEastWall" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesEastTooFar" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMakeRoomDiameter2" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsSouthMoreThanHeight" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testMakeRoomDiameter2" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsSouthMoreThanHeight" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsWestTooFar" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter4AtWestWall" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesNorth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesNorth" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesSouth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintWest" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter2AtNorthWall" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeEastAndFacingEast" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter4AtNorthWall" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeEastAndFacingEast" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter4AtNorthWall" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter1AtEastWall" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsNorth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsSouth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testGetFacing" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5AtNorthWall" time="0.001"/>
-  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeWestAndNotFacingWest" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testMakeOpenSpaceDiameter5AtNorthWall" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeWestAndNotFacingWest" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testGetHeight" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintedTilesNorth" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintedTilesSouth" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeEastAndFacingNorth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeEastAndFacingNorth" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testCannotMoveToOffMapX" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testCannotMoveToOffMapY" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testChangeTile" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMoveTo" time="0.001"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsEastDistanceMoreThanWidth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testMoveTo" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsEastDistanceMoreThanWidth" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesSouthTooFar" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeWestAndFacingWest" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintChangesDirectionSouth" time="0.001"/>
-  <testcase classname="worldBuilding.WandererTest" name="testWander" time="0.006"/>
-  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeNorthAndNotFacingNorth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintChangesDirectionSouth" time="0"/>
+  <testcase classname="worldBuilding.WandererTest" name="testWander" time="0.007"/>
+  <testcase classname="worldBuilding.WandererTest" name="testWanderIfAtEdgeNorthAndNotFacingNorth" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprint2" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprint3" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testMakeChild" time="0.001"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintedTilesWest" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintedTilesLimiter" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesWestTooFar" time="0"/>
-  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsEast" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testLimitSprintedTilesWestTooFar" time="0.001"/>
+  <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsEast" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintChangeTilesToFloorsWest" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSetTiles" time="0"/>
   <testcase classname="worldBuilding.WandererTest" name="testSprintChangesDirectionAnyDirection" time="0"/>

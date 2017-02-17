@@ -64,5 +64,37 @@ public class DoorTileTest {
 		boolean stairs = false;
 		assertEquals(stairs, door.isStairs());
 	}
+	
+	@Test
+	public void testPartnerMethods(){
+		assertNull(door.getPartner());
+		assertNull(door.getPartnerLoc());
+	}
+	
+	@Test
+	public void testBlocksVisionClosed(){
+		boolean closedBlocksVision = true;
+		assertEquals(closedBlocksVision, door.blocksVision());
+	}
+	
+	@Test
+	public void testBlocksVisionOpen(){
+		boolean openBlocksVision = false;
+		door.changeDoorState();
+		assertEquals(openBlocksVision, door.blocksVision());
+	}
+	
+	@Test
+	public void testIsLit(){
+		boolean isLit = false;
+		assertEquals(isLit, door.isLit());
+	}
+	
+	@Test
+	public void testChangeLitState(){
+		boolean isLit = true;
+		door.changeLitState();
+		assertEquals(isLit, door.isLit());
+	}
 
 }

@@ -12,6 +12,7 @@ public interface World {
 	public char getGlyph(int x, int y, int z);
 	public Color getColor(int x, int y, int z);
 	public void addAtEmptyLocation(Creature creature);
+	public void addAtEmptyLocation(Creature creature, int layer);
 	public Creature getCreatureAt(int x, int y, int z);
 	public List<Creature> getCreatures();
 	public void setCreatureAt(int x, int y, int z, Creature creature);
@@ -20,4 +21,5 @@ public interface World {
 	public void addCreature(Creature creature);
 	public void update();
 	public int getDepth();
+	public void setTileAt(int x, int y, int z, Tile newTile);
 }

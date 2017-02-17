@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="15" failures="0" name="world.LayerTest" time="0" errors="0" skipped="0">
+<testsuite tests="16" failures="0" name="world.LayerTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\devl\Java\jdk1.8.0_101\jre\bin"/>
@@ -74,8 +74,9 @@
   <testcase classname="world.LayerTest" name="testSetCreatureAt" time="0"/>
   <testcase classname="world.LayerTest" name="testGetTileGetsOutOfBoundsIfTileXIsLessThan0" time="0"/>
   <testcase classname="world.LayerTest" name="testGetTileGetsOutOfBoundsIfTileYIsLessThan0" time="0"/>
-  <testcase classname="world.LayerTest" name="testGetTileOverloadedForLayers" time="0"/>
   <testcase classname="world.LayerTest" name="testGetTileGetsTileThatExists" time="0"/>
   <testcase classname="world.LayerTest" name="testGetHeight" time="0"/>
   <testcase classname="world.LayerTest" name="testGetTileGetsOutOfBoundsIfTileYIsGreaterThanHeight" time="0"/>
+  <testcase classname="world.LayerTest" name="testSetTileAt1x1" time="0"/>
+  <testcase classname="world.LayerTest" name="testSetTileat1x2" time="0"/>
 </testsuite>

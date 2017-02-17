@@ -14,6 +14,7 @@ import world.Layer;
 import world.World;
 import world.WorldImpl;
 import worldBuilding.CavernBuilder;
+import worldBuilding.FloorConnect;
 import worldBuilding.Wanderer;
 
 public class PlayScreen implements Screen {
@@ -113,6 +114,8 @@ public class PlayScreen implements Screen {
 			layers.add(layer);
 			cavernBuilder = new CavernBuilder(worldWidth, worldHeight);
 		}
+		FloorConnect connect = new FloorConnect(world);
+		connect.connectAllLayers();
 	}
 
 	public int getCenterX() {
@@ -146,10 +149,6 @@ public class PlayScreen implements Screen {
 	public void scrollBy(int moveX, int moveY) {
 		centerX = Math.max(0, Math.min(centerX + moveX, getLayerWidth() - 1));
 		centerY = Math.max(0, Math.min(centerY + moveY, getLayerHeight() - 1));
-	}
-	
-	public void moveBy(int moveX, int moveY, int moveZ){
-		player.moveBy(moveX, moveY, moveZ);
 	}
 	
 	public Creature getPlayer(){

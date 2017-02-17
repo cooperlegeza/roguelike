@@ -3,6 +3,7 @@ C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\j
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\worldBuilding\LayerMethod.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\creatures\CreatureFactory.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\creatures\Creature.java
+C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\worldBuilding\FloorConnect.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\rooms\BasicRoom.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\screens\WinScreen.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\tiles\Tile.java
@@ -12,6 +13,7 @@ C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\j
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\worldBuilding\Noise.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\worldBuilding\Wanderer.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\worldBuilding\Flood.java
+C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\fieldOfVision\FieldOfVision.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\world\WorldImpl.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\creatureAIs\PlayerAI.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\keyHandlers\StartScreenKeys.java
@@ -38,4 +40,5 @@ C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\j
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\rooms\Room.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\screens\Screen.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\screens\LoseScreen.java
+C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\fieldOfVision\ImpShadowcasting.java
 C:\Users\Manifest\Documents\workspace-sts-3.8.2.RELEASE\theQuietWhite\src\main\java\screens\PlayScreen.java

@@ -52,7 +52,7 @@ public class Layer {
 		return getTile(x, y).getColor();
 	}
 	
-	public void addAtEmptyLocation(Creature creature){
+	public void addAtEmptyLocation(Creature creature, int layer){
 		int x;
 		int y;
 		do {
@@ -60,7 +60,7 @@ public class Layer {
 			y = (int)(Math.random() * height);
 		} while (!getTile(x, y).isGround());
 		
-		setCreatureAt(x, y, creature);
+		setCreatureAt(x, y, layer, creature);
 	}
 	
 	public Creature getCreatureAt(int x, int y){
@@ -70,9 +70,14 @@ public class Layer {
 		return null;
 	}
 	
-	public void setCreatureAt(int x, int y, Creature creature){
+	public void setCreatureAt(int x, int y, int z, Creature creature){
 		creature.setX(x);
 		creature.setY(y);
+		creature.setZ(z);
+	}
+	
+	public void setTileAt(int x, int y, Tile newTile){
+		tiles[x][y] = newTile;
 	}
 
 }

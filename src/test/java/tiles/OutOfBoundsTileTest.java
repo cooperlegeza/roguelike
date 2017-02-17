@@ -37,5 +37,30 @@ public class OutOfBoundsTileTest {
 		boolean stairs = false;
 		assertEquals(stairs, outOfBounds.isStairs());
 	}
+	
+	@Test
+	public void testPartnerMethods(){
+		assertNull(outOfBounds.getPartner());
+		assertNull(outOfBounds.getPartnerLoc());
+	}
+	
+	@Test
+	public void testBlocksVision(){
+		boolean blocksVision = true;
+		assertEquals(blocksVision, outOfBounds.blocksVision());
+	}
+	
+	@Test
+	public void testIsLitOnInit(){
+		boolean isLit = false;
+		assertEquals(isLit, outOfBounds.isLit());
+	}
+	
+	@Test
+	public void testChangeLitStateDoesNotChangeLitState(){
+		boolean isLit = false;
+		outOfBounds.changeLitState();
+		assertEquals(isLit, outOfBounds.isLit());
+	}
 
 }

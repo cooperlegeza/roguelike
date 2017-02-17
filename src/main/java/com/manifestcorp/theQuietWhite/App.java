@@ -38,7 +38,7 @@ public class App extends JFrame implements KeyListener {
 		repaint();
 	}
 	
-    public static void main( String[] args ){
+    public static void main(String[] args){
     	App app = new App();
     	app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	app.setVisible(true);

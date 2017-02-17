@@ -37,5 +37,30 @@ public class FloorTileTest {
 		boolean stairs = false;
 		assertEquals(stairs, floor.isStairs());
 	}
+	
+	@Test
+	public void testPartnerMethods(){
+		assertNull(floor.getPartner());
+		assertNull(floor.getPartnerLoc());
+	}
+	
+	@Test
+	public void testBlocksVision(){
+		boolean blocksVision = false;
+		assertEquals(blocksVision, floor.blocksVision());
+	}
+	
+	@Test
+	public void testIsLitOnInit(){
+		boolean isLit = false;
+		assertEquals(isLit, floor.isLit());
+	}
+	
+	@Test
+	public void testChangeLitState(){
+		boolean isLit = true;
+		floor.changeLitState();
+		assertEquals(isLit, floor.isLit());
+	}
 
 }

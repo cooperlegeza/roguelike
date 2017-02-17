@@ -11,6 +11,7 @@ public class DoorTile implements Tile {
 	private boolean open;
 	private boolean ground;
 	private boolean stairs;
+	private boolean isLit;
 	
 	public DoorTile(){
 		symbol = '+';
@@ -18,6 +19,7 @@ public class DoorTile implements Tile {
 		open = false;
 		ground = open;
 		stairs = false;
+		isLit = false;
 	}
 
 	@Override
@@ -52,6 +54,31 @@ public class DoorTile implements Tile {
 	@Override
 	public boolean isStairs() {
 		return stairs;
+	}
+	
+	@Override
+	public Tile getPartner(){
+		return null;
+	}
+	
+	@Override
+	public int[] getPartnerLoc(){
+		return null;
+	}
+
+	@Override
+	public boolean blocksVision() {
+		return !open;
+	}
+
+	@Override
+	public boolean isLit() {
+		return isLit;
+	}
+
+	@Override
+	public void changeLitState() {
+		isLit = !isLit;
 	}
 
 }

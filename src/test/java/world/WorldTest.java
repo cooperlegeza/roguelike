@@ -18,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import asciiPanel.AsciiPanel;
 import creatures.Creature;
 import creatures.CreatureFactory;
+import tiles.FloorTile;
 import tiles.Tile;
 import tiles.WallTile;
 import utils.RogueMath;
@@ -84,7 +85,7 @@ public class WorldTest {
 		when(math.random()).thenReturn(0.5);
 		Creature creature = Mockito.mock(Creature.class);
 		world.addAtEmptyLocation(creature);
-		verify(spyLayer, times(1)).addAtEmptyLocation(creature);
+		verify(spyLayer, times(1)).addAtEmptyLocation(creature, 1);
 	}
 	
 	@Test
@@ -121,7 +122,7 @@ public class WorldTest {
 		int expectedZ = 1;
 		world.setCreatureAt(expectedX, expectedY, expectedZ, creature);
 		assertEquals(expectedZ, creature.z());
-		verify(spyLayer, times(1)).setCreatureAt(expectedX, expectedY, creature);
+		verify(spyLayer, times(1)).setCreatureAt(expectedX, expectedY, expectedZ, creature);
 		assertEquals(world.getCreatures().size(), expectedCreaturesSize);
 	}
 
@@ -143,6 +144,22 @@ public class WorldTest {
 	public void testGetDepth(){
 		int expectedDepth = 3;
 		assertEquals(expectedDepth, world.getDepth());
+	}
+	
+	@Test
+	public void testSetTileAt(){
+		int x = 1, y = 1, z = 1;
+		Tile newTile = new FloorTile();
+		world.setTileAt(x, y, z, newTile);
+		verify(spyLayer, times(1)).setTileAt(x, y, newTile);
+	}
+	
+	@Test
+	public void testAddAtEmptyLocationWithSpecifiedLayer(){
+		Creature creature = Mockito.mock(Creature.class);
+		int expectedLayer = 1;
+		world.addAtEmptyLocation(creature, expectedLayer);
+		verify(spyLayer, times(1)).addAtEmptyLocation(creature, expectedLayer);
 	}
 
 }

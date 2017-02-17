@@ -126,7 +126,7 @@ public class LayerTest {
 	public void testAddAtEmptyLocation(){
 		boolean isGround = true;
 		Creature player = factory.newPlayer();
-		layer.addAtEmptyLocation(player);
+		layer.addAtEmptyLocation(player, 0);
 		assertEquals(isGround, layer.getTile(player.x(), player.y()).isGround());
 	}
 	
@@ -150,14 +150,26 @@ public class LayerTest {
 		when(world.getCreatures()).thenReturn(worldList);
 		int expectedX = 2;
 		int expectedY = 2;
-		layer.setCreatureAt(expectedX, expectedY, creature);
+		int expectedZ = 0;
+		layer.setCreatureAt(expectedX, expectedY, expectedZ, creature);
 		assertEquals(expectedX, creature.x());
 		assertEquals(expectedY, creature.y());
+		assertEquals(expectedZ, creature.z());
 	}
 	
 	@Test
-	public void testGetTileOverloadedForLayers(){
-		
+	public void testSetTileAt1x1(){
+		int x = 1, y = 1;
+		Tile newTile = new FloorTile();
+		layer.setTileAt(x, y, newTile);
+		assertEquals(newTile, layer.getTile(x, y));
 	}
-
+	
+	@Test
+	public void testSetTileat1x2(){
+		int x = 1, y = 2;
+		Tile newTile = new WallTile();
+		layer.setTileAt(x, y, newTile);
+		assertEquals(newTile, layer.getTile(x, y));
+	}
 }

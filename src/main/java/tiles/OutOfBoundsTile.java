@@ -38,5 +38,31 @@ public class OutOfBoundsTile implements Tile {
 	public boolean isStairs() {
 		return stairs;
 	}
+	
+	@Override
+	public Tile getPartner(){
+		return null;
+	}
+	
+	@Override
+	public int[] getPartnerLoc(){
+		return null;
+	}
+
+
+	@Override
+	public boolean blocksVision() {
+		return true;
+	}
+
+
+	@Override
+	public boolean isLit() {
+		return false;
+	}
+
+
+	@Override
+	public void changeLitState() { }
 
 }

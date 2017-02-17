@@ -60,5 +60,24 @@ public class DownStairsTileTest {
 		boolean stairs = true;
 		assertEquals(stairs, down.isStairs());
 	}
+	
+	@Test
+	public void testBlocksVision(){
+		boolean blocksVision = false;
+		assertEquals(blocksVision, down.blocksVision());
+	}
+	
+	@Test
+	public void testIsLitOnInit(){
+		boolean isLit = false;
+		assertEquals(isLit, down.isLit());
+	}
+	
+	@Test
+	public void testChangeLitState(){
+		boolean isLit = true;
+		down.changeLitState();
+		assertEquals(isLit, down.isLit());
+	}
 
 }

@@ -96,17 +96,30 @@ public class Creature {
 	
 	public void checkForObstaclesAndReactAccordingly(int newX, int newY, int newZ){
 		Creature other = world.getCreatureAt(newX, newY, newZ);
-		Tile tile = world.getTile(newX, newY, newZ);
 		if(other == null){
-			if(tile.isStairs()){
-				
-			} else {
-				ai.onEnter(newX, newY, newZ, tile);	
-			}
+			checkIfCanTravelAndThenTravel(newX, newY, newZ);
 		} else {
 			attack(other);
 		}
 	}
+	
+	private void checkIfCanTravelAndThenTravel(int newX, int newY, int newZ){
+		Tile nextTile = world.getTile(newX, newY, newZ);
+		if(nextTile.isGround()){
+			ai.onEnter(newX, newY, newZ, nextTile);	
+		}
+	}
+	
+	public void useStairs(Tile movingFrom){
+		if(movingFrom.getPartnerLoc() != null){
+			int[] loc = movingFrom.getPartnerLoc();
+			doAction("use the stairs to go to level %d", loc[2]);
+			world.setCreatureAt(loc[0], loc[1], loc[2], this);
+		} else {
+			doAction("do not use stairs here");
+		}
+	}
+	
 	
 	public void attack(Creature other){
 		doAction("attack the '%s'", other.glyph);

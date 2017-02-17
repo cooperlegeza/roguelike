@@ -20,7 +20,7 @@ public class CreatureFactory {
 		Creature player = new Creature(world, '@', AsciiPanel.red, 100);
 		PlayerAI ai = new PlayerAI(player);
 		player.setCreatureAI(ai);
-		world.addAtEmptyLocation(player);
+		world.addAtEmptyLocation(player, 0);
 		Fists fists = new Fists(5, 10);
 		player.setBaseWeapon(fists);
 		return player;
@@ -30,7 +30,7 @@ public class CreatureFactory {
 		Creature player = new Creature(world, '@', AsciiPanel.red, 100);
 		PlayerAI ai = new PlayerAI(player, messages);
 		player.setCreatureAI(ai);
-		world.addAtEmptyLocation(player);
+		world.addAtEmptyLocation(player, 0);
 		Fists fists = new Fists(5, 10);
 		player.setBaseWeapon(fists);
 		return player;

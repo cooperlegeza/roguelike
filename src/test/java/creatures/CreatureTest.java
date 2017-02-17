@@ -16,8 +16,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 import asciiPanel.AsciiPanel;
 import creatureAIs.CreatureAI;
 import creatureAIs.PlayerAI;
+import tiles.DownStairsTile;
 import tiles.FloorTile;
 import tiles.Tile;
+import tiles.UpStairsTile;
 import tiles.WallTile;
 import weapons.Fists;
 import world.Layer;
@@ -33,20 +35,36 @@ public class CreatureTest {
 	
 	Creature creature;
 	FloorTile floor;
+	DownStairsTile down;
+	UpStairsTile up;
+	WallTile wall;
 	World world;
 	
 	@Before
 	public void initialize(){
 		List<Layer> layers = new LinkedList<Layer>();
 		world = new WorldImpl(layers);
+		down = Mockito.spy(new DownStairsTile());
+		up = Mockito.spy(new UpStairsTile());
+		wall = Mockito.spy(new WallTile());
 		Tile[][] tiles = {
 				{new FloorTile(), new FloorTile(), new FloorTile(), new FloorTile()},
 				{new FloorTile(), new FloorTile(), new WallTile(), new WallTile()},
-				{new WallTile(), new WallTile(), new FloorTile(), new FloorTile()},
+				{new WallTile(), down, wall, new FloorTile()},
 				{new WallTile(), new WallTile(), new FloorTile(), new FloorTile()},
 		};
+		Tile[][] tiles2 = {
+				{new FloorTile(), new FloorTile(), new FloorTile(), new FloorTile()},
+				{new FloorTile(), new FloorTile(), new WallTile(), new WallTile()},
+				{new WallTile(), up, new FloorTile(), new FloorTile()},
+				{new WallTile(), new WallTile(), new FloorTile(), new FloorTile()},
+		};
+		up.setPartner(down);
+		up.setPartnerLoc(2, 1, 0);
+		down.setPartner(up);
+		down.setPartnerLoc(2, 1, 1);
 		layer = new Layer(tiles, world);
-		Layer newLayer = new Layer(tiles, world);
+		Layer newLayer = new Layer(tiles2, world);
 		layers.add(layer);
 		layers.add(newLayer);
 		creature = Mockito.spy(new Creature(world, '@', AsciiPanel.green, 100));
@@ -108,8 +126,8 @@ public class CreatureTest {
 	
 	@Test
 	public void testCheckForObstaclesAndReactAccordinglyNoCreature(){
-		creature.checkForObstaclesAndReactAccordingly(2, 2, creature.z());
-		verify(creatureAISpy, times(1)).onEnter(2, 2, creature.z(), layer.getTile(2, 2));
+		creature.checkForObstaclesAndReactAccordingly(2, 1, creature.z());
+		verify(creatureAISpy, times(1)).onEnter(2, 1, creature.z(), layer.getTile(2, 1));
 	}
 	
 	@Test
@@ -180,7 +198,7 @@ public class CreatureTest {
 	
 	@Test
 	public void testCanEnterActuallyCanEnter(){
-		boolean actual = creature.canEnter(2, 2);
+		boolean actual = creature.canEnter(2, 1);
 		boolean expected = true;
 		assertEquals(expected, actual);
 	}
@@ -292,5 +310,19 @@ public class CreatureTest {
 		creature.setZ(1);
 		creature.moveBy(0, 0, 1);
 		verify(creature, times(0)).checkForObstaclesAndReactAccordingly(0, 0, 2);
+	}
+	
+	@Test
+	public void testUseStairsWithGoodTile(){
+		creature.useStairs(down);
+		verify(down, times(2)).getPartnerLoc();
+		verify(creature, times(1)).doAction("use the stairs to go to level %d", 1);
+	}
+	
+	@Test
+	public void testUseStairsWithBadTile(){
+		creature.useStairs(wall);
+		verify(wall, times(1)).getPartnerLoc();
+		verify(creature, times(1)).doAction("do not use stairs here");
 	}
 }
